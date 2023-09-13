@@ -47,17 +47,23 @@ AppBar myAppBar() {
       child: Wrap(
         direction: Axis.vertical,
         spacing: -12,
+        runSpacing: 0,
         children: [
-          Text('Saldo',
-            style: TextStyle(
-              fontSize: 24.0, 
-              color: Color(CustomColor.EASports)
+          Padding(
+            padding: EdgeInsets.only(left: 2),
+            child: Text('Saldo',
+              style: TextStyle(
+                fontSize: 24.0, 
+                color: Color(CustomColor.EASports),
+                fontFamily: 'Metrophobic',
+                ),
               ),
-            ),
+          ),
           Text('R\$1000.00',
             style: TextStyle(
               fontSize: 42.0,
-              color: Color(CustomColor.EASports)
+              color: Color(CustomColor.EASports),
+              fontFamily: 'Metrophobic'
               ),
             )
         ],
