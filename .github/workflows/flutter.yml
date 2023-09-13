@@ -1,16 +1,7 @@
 name: Android Release
 
 # 1
-on:
-  # 2
-  push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
-
-  # 3
-  workflow_dispatch:
-
+on: [push]
 # 4
 jobs:
   # 5
