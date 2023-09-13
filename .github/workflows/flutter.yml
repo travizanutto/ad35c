@@ -24,6 +24,10 @@ jobs:
           # 11
           flutter-version: "3.0.0"
           channel: 'stable'
+
+      - uses: dart-lang/setup-dart@v1
+        with:
+          sdk: 'stable'
       # 12
       - name: Get dependencies
         run: flutter pub get
