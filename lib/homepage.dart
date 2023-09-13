@@ -25,7 +25,7 @@ class HomePage extends StatelessWidget {
 
 AppBar myAppBar() {
   return AppBar(
-        title: const Text('vWallet'),
+        title: const Text('TESTE'),
         centerTitle: true,
         backgroundColor: const Color(CustomColor.gunmetal),
         leading: Container(
