@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:vwalltet/pages/transaction_controller.dart';
+import 'package:vwalltet/pages/transaction_page.dart';
 
 class CustomColor {
   static const gunmetal = 0xff183642;
@@ -20,12 +21,22 @@ class HomePage extends StatelessWidget {
       appBar: homePageAppBar(),
       body: ListView.separated(
         itemCount: transactionController.transactionList.length,
-        itemBuilder: (BuildContext context, int i) {
+        itemBuilder: (BuildContext context, int transaction) {
           final list = transactionController.transactionList;
           return ListTile(
             leading: SvgPicture.asset('assets/icons/man_pp.svg', alignment: Alignment.bottomLeft,),
-            title: Text(list[i].name),
-            trailing: Text(list[i].price.toString()),
+            title: Text(list[transaction].name),
+            trailing: Text(list[transaction].price.toString()),
+            onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => TransactionPage(
+                      key: Key(list[transaction].name),
+                      transaction: list[transaction],
+                      )
+                  ));
+            },
           );
         },
         separatorBuilder: (_, __) => Divider(),
