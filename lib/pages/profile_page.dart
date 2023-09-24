@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import '../models/profile.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -22,7 +23,8 @@ class ProfilePage extends StatelessWidget {
               padding: EdgeInsets.all(16.0),
               child: CircleAvatar(
                 radius: 60.0,
-                backgroundImage: AssetImage(userProfile.profileImageUrl),
+                // backgroundImage: AssetImage(userProfile.profileImageUrl),
+                // PADILHA ARRUMA ISSO TA TRAVANDO O APP
               ),
             ),
 
