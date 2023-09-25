@@ -4,7 +4,7 @@ import 'package:vwalltet/pages/transaction_controller.dart';
 import 'package:vwalltet/repositories/card_repository.dart';
 import 'profile_page.dart';
 import '../models/profile.dart';
-import 'package:vwalltet/pages/transaction_page.dart';
+
 
 class CustomColor {
   static const gunmetal = 0xff183642;
