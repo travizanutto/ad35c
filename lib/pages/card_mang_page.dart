@@ -26,3 +26,4 @@ class _CardManagerPageState extends State<CardManagerPage> {
     );
   }
 }
+
