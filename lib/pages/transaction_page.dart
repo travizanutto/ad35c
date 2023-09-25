@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:vwalltet/pages/home_page.dart';
-import '../models/transaction.dart';
+import '../models/transaction_model.dart';
 
 class TransactionPage extends StatefulWidget {
-  Transaction transaction;
-  TransactionPage({required Key key, required this.transaction}) : super(key: key);
+  TransactionModel transaction;
+  TransactionPage({required Key key, required this.transaction})
+      : super(key: key);
 
   @override
   State<TransactionPage> createState() => _TransactionPageState();
@@ -13,7 +14,7 @@ class TransactionPage extends StatefulWidget {
 class _TransactionPageState extends State<TransactionPage> {
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController (
+    return DefaultTabController(
       length: 2,
       child: Scaffold(
         appBar: AppBar(

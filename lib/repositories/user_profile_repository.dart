@@ -1,16 +1,16 @@
-import '../models/profile.dart';
+import '../models/profile_model.dart';
 
 class UserProfileRepository {
   // Simula um banco de dados fictício
-  final Map<String, UserProfile> _userProfiles = {};
+  final Map<String, ProfileModel> _userProfiles = {};
 
   // Método para buscar o perfil do usuário por ID
-  UserProfile? getUserProfileById(String userId) {
+  ProfileModel? getUserProfileById(String userId) {
     return _userProfiles[userId];
   }
 
   // Método para salvar ou atualizar o perfil do usuário
-  void saveUserProfile(UserProfile userProfile) {
+  void saveUserProfile(ProfileModel userProfile) {
     _userProfiles[userProfile.id] = userProfile;
   }
 

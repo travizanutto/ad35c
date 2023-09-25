@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:vwalltet/pages/transaction_controller.dart';
 import 'package:vwalltet/repositories/card_repository.dart';
 import 'profile_page.dart';
-import '../models/profile.dart';
-
+import '../models/profile_model.dart';
 
 class CustomColor {
   static const gunmetal = 0xff183642;
@@ -14,7 +12,7 @@ class CustomColor {
   static const EASports = 0xffeaeaea;
 }
 
-UserProfile userProfile = UserProfile(
+ProfileModel userProfile = ProfileModel(
   id: 'userId',
   username: 'NomeDeUsuario',
   email: 'usuario@example.com',
@@ -29,7 +27,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  var transactionController = TransactionController();
   final cardList = CardRepository.list;
 
   @override
@@ -50,32 +47,47 @@ class _HomePageState extends State<HomePage> {
                   height: 40,
                   child: SvgPicture.asset('assets/icons/mastercard_logo.svg')),
               title: Text(cardList[index].alias),
-              trailing: Text('↓\$${cardList[index].incoming} | ↑\$${cardList[index].expense}'),
+              trailing: SizedBox(
+                width: 100,
+                height: 20,
+                child: Row(
+                  children: [
+                    Text(
+                      //↓
+                      '↓\$${cardList[index].incoming}',
+                      style: TextStyle(color: Colors.green),
+                    ),
+                    Text(' | '),
+                    Text(
+                      //
+                      '↑\$${cardList[index].expense}',
+                      style: TextStyle(color: Colors.red),
+                    ),
+                  ],
+                ),
+              ),
             );
           },
-          padding: EdgeInsets.all(16),
-          separatorBuilder: (_, __) => const Divider(),
+          separatorBuilder: (_, __) => const Divider(
+                indent: 16,
+                endIndent: 16,
+                thickness: 1.5,
+                color: Color(CustomColor.delftBlue),
+              ),
           itemCount: cardList.length),
     );
   }
 }
 
 Row appBarTitle() {
-  return Row(
+  return const Row(
     children: [
-      const Text('Seus cartões',
+      Text('Seus cartões',
           style: TextStyle(
             fontFamily: 'Metrophobic',
             fontSize: 24,
-            color: Color(CustomColor.EASports),
+            color: Color.fromARGB(255, 255, 255, 255),
           )),
-      Padding(
-        padding: const EdgeInsets.only(left: 2, top: 7),
-        child: SizedBox(
-            height: 8.0,
-            width: 8.0,
-            child: SvgPicture.asset('assets/icons/down_arrow.svg')),
-      )
     ],
   );
 }
@@ -84,7 +96,7 @@ AppBar homePageAppBar(BuildContext context) {
   return AppBar(
     title: appBarTitle(),
     centerTitle: false,
-    backgroundColor: const Color(CustomColor.pompAndPower),
+    backgroundColor: const Color(CustomColor.delftBlue),
     actions: [
       GestureDetector(
         onTap: () {

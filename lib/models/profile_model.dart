@@ -1,4 +1,4 @@
-class UserProfile {
+class ProfileModel {
   String id;
   String username;
   String email;
@@ -6,7 +6,7 @@ class UserProfile {
   String bio;
   String profileImageUrl;
 
-  UserProfile({
+  ProfileModel({
     required this.id,
     required this.username,
     required this.email,
