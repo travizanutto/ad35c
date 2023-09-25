@@ -10,7 +10,6 @@ class CustomColor {
   static const delftBlue = 0xff313d5a;
   static const pompAndPower = 0xff73628a;
   static const periwinkle = 0xffcbc5ea;
-  // ignore: constant_identifier_names
   static const EASports = 0xffeaeaea;
 }
 

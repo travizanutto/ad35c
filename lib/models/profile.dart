@@ -1,10 +1,10 @@
 class UserProfile {
-  final String id;
-  final String username;
-  final String email;
-  final String phoneNumber;
-  final String bio;
-  final String profileImageUrl;
+  String id;
+  String username;
+  String email;
+  String phoneNumber;
+  String bio;
+  String profileImageUrl;
 
   UserProfile({
     required this.id,
