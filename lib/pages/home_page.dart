@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:vwalltet/pages/transaction_controller.dart';
+import 'package:vwalltet/repositories/card_repository.dart';
 import 'profile_page.dart';
 import '../models/profile.dart';
 import 'package:vwalltet/pages/transaction_page.dart';
@@ -30,36 +31,32 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   var transactionController = TransactionController();
+  final cardList = CardRepository.list;
+
+  @override
+  void initState() {
+    build(context);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: homePageAppBar(context),
       body: ListView.separated(
-        itemCount: transactionController.transactionList.length,
-        itemBuilder: (BuildContext context, int transaction) {
-          final list = transactionController.transactionList;
-          return ListTile(
-            leading: SvgPicture.asset('assets/icons/man_pp.svg', alignment: Alignment.bottomLeft,),
-            title: Text(list[transaction].name),
-            trailing: Text(list[transaction].price.toString()),
-            onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => TransactionPage(
-                      key: Key(list[transaction].name),
-                      transaction: list[transaction],
-                      )
-                  ));
-            },
-          );
-        },
-        separatorBuilder: (_, __) => Divider(),
-        padding: EdgeInsets.all(0),
-      ),
-      backgroundColor: const Color(CustomColor.EASports),
-
+          itemBuilder: (BuildContext context, int index) {
+            return ListTile(
+              leading: SizedBox(
+                  width: 40,
+                  height: 40,
+                  child: SvgPicture.asset('assets/icons/mastercard_logo.svg')),
+              title: Text(cardList[index].alias),
+              trailing: Text('↓\$${cardList[index].incoming} | ↑\$${cardList[index].expense}'),
+            );
+          },
+          padding: EdgeInsets.all(16),
+          separatorBuilder: (_, __) => const Divider(),
+          itemCount: cardList.length),
     );
   }
 }
