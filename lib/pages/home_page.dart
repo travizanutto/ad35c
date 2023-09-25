@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:vwalltet/pages/transaction_controller.dart';
+import 'package:get/get.dart';
+import 'package:vwalltet/pages/card_mang_page.dart';
 import 'package:vwalltet/repositories/card_repository.dart';
+import 'package:vwalltet/widgets/card_list_view.dart';
+import 'package:vwalltet/widgets/home_page_widgets.dart';
 import 'profile_page.dart';
-import '../models/profile.dart';
-
+import '../models/profile_model.dart';
 
 class CustomColor {
   static const gunmetal = 0xff183642;
@@ -14,7 +16,7 @@ class CustomColor {
   static const EASports = 0xffeaeaea;
 }
 
-UserProfile userProfile = UserProfile(
+ProfileModel userProfile = ProfileModel(
   id: 'userId',
   username: 'NomeDeUsuario',
   email: 'usuario@example.com',
@@ -29,9 +31,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  var transactionController = TransactionController();
-  final cardList = CardRepository.list;
-
   @override
   void initState() {
     build(context);
@@ -42,68 +41,17 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: homePageAppBar(context),
-      body: ListView.separated(
-          itemBuilder: (BuildContext context, int index) {
-            return ListTile(
-              leading: SizedBox(
-                  width: 40,
-                  height: 40,
-                  child: SvgPicture.asset('assets/icons/mastercard_logo.svg')),
-              title: Text(cardList[index].alias),
-              trailing: Text('↓\$${cardList[index].incoming} | ↑\$${cardList[index].expense}'),
-            );
-          },
-          padding: EdgeInsets.all(16),
-          separatorBuilder: (_, __) => const Divider(),
-          itemCount: cardList.length),
+      body: cardListView(),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          Get.to(CardManagerPage());
+        },
+        label: Text(
+          'ADICIONAR',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        backgroundColor: Color(CustomColor.delftBlue),
+      ),
     );
   }
-}
-
-Row appBarTitle() {
-  return Row(
-    children: [
-      const Text('Seus cartões',
-          style: TextStyle(
-            fontFamily: 'Metrophobic',
-            fontSize: 24,
-            color: Color(CustomColor.EASports),
-          )),
-      Padding(
-        padding: const EdgeInsets.only(left: 2, top: 7),
-        child: SizedBox(
-            height: 8.0,
-            width: 8.0,
-            child: SvgPicture.asset('assets/icons/down_arrow.svg')),
-      )
-    ],
-  );
-}
-
-AppBar homePageAppBar(BuildContext context) {
-  return AppBar(
-    title: appBarTitle(),
-    centerTitle: false,
-    backgroundColor: const Color(CustomColor.pompAndPower),
-    actions: [
-      GestureDetector(
-        onTap: () {
-          // Navegue para a ProfilePage quando o ícone for tocado.
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => ProfilePage(userProfile: userProfile),
-            ),
-          );
-        },
-        child: Container(
-          margin: const EdgeInsets.all(10),
-          width: 30,
-          height: 30,
-          child: SvgPicture.asset('assets/icons/man_pp.svg'),
-        ),
-      ),
-    ],
-    elevation: 0,
-  );
 }

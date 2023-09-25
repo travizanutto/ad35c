@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import '../models/profile.dart';
+import '../models/profile_model.dart';
 import 'home_page.dart';
 
 class EditProfilePage extends StatefulWidget {
-  final UserProfile userProfile;
+  final ProfileModel userProfile;
 
   EditProfilePage({required this.userProfile});
 
@@ -11,7 +11,8 @@ class EditProfilePage extends StatefulWidget {
   _EditProfilePageState createState() => _EditProfilePageState();
 }
 
-final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
+final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey =
+    GlobalKey<ScaffoldMessengerState>();
 
 class _EditProfilePageState extends State<EditProfilePage> {
   // Variáveis para controlar os campos de edição
@@ -40,18 +41,21 @@ class _EditProfilePageState extends State<EditProfilePage> {
       ),
       body: Form(
         child: SingleChildScrollView(
-          padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+          padding:
+              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
           child: Column(
             children: [
               Container(
-                margin: const EdgeInsets.only(top: 16.0), // Espaçamento acima do campo "Nome de Usuário"
+                margin: const EdgeInsets.only(
+                    top: 16.0), // Espaçamento acima do campo "Nome de Usuário"
                 child: TextFormField(
                   controller: usernameController,
                   keyboardType: TextInputType.name,
                   decoration: InputDecoration(
                     labelText: 'Nome de Usuário',
                     focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(color: Color(CustomColor.pompAndPower)),
+                      borderSide: const BorderSide(
+                          color: Color(CustomColor.pompAndPower)),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     enabledBorder: OutlineInputBorder(
@@ -62,13 +66,15 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 ),
               ),
               Container(
-                margin: const EdgeInsets.only(top: 16.0), // Espaçamento acima do campo "Email"
+                margin: const EdgeInsets.only(
+                    top: 16.0), // Espaçamento acima do campo "Email"
                 child: TextFormField(
                   controller: emailController,
                   decoration: InputDecoration(
                     labelText: 'Email',
                     focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(color: Color(CustomColor.pompAndPower)),
+                      borderSide: const BorderSide(
+                          color: Color(CustomColor.pompAndPower)),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     enabledBorder: OutlineInputBorder(
@@ -79,7 +85,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 ),
               ),
               Container(
-                margin: const EdgeInsets.only(top: 16.0), // Espaçamento acima do campo "Número de Telefone"
+                margin: const EdgeInsets.only(
+                    top:
+                        16.0), // Espaçamento acima do campo "Número de Telefone"
                 child: TextFormField(
                   controller: phoneNumberController,
                   keyboardType: TextInputType.number,
@@ -87,7 +95,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     labelText: 'Número de Telefone',
                     hintText: '(___)________',
                     focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(color: Color(CustomColor.pompAndPower)),
+                      borderSide: const BorderSide(
+                          color: Color(CustomColor.pompAndPower)),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     enabledBorder: OutlineInputBorder(
@@ -96,9 +105,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     ),
                     // Define o mínimo de caracteres
                     counterText: '', // Remove o contador de caracteres padrão
-                    counterStyle: const TextStyle(fontSize: 0), // Remove o estilo do contador de caracteres
-                    helperText: 'Mínimo e máximo de 12 caracteres', // Mensagem de ajuda
-                    helperStyle: const TextStyle(fontSize: 12, color: Colors.grey),
+                    counterStyle: const TextStyle(
+                        fontSize:
+                            0), // Remove o estilo do contador de caracteres
+                    helperText:
+                        'Mínimo e máximo de 12 caracteres', // Mensagem de ajuda
+                    helperStyle:
+                        const TextStyle(fontSize: 12, color: Colors.grey),
                   ),
                   maxLength: 12, // Define o número máximo de caracteres
                   validator: (value) {
@@ -114,13 +127,15 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 ),
               ),
               Container(
-                margin: const EdgeInsets.only(top: 16.0), // Espaçamento acima do campo "Biografia"
+                margin: const EdgeInsets.only(
+                    top: 16.0), // Espaçamento acima do campo "Biografia"
                 child: TextFormField(
                   controller: bioController,
                   decoration: InputDecoration(
                     labelText: 'Biografia',
                     focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(color: Color(CustomColor.pompAndPower)),
+                      borderSide: const BorderSide(
+                          color: Color(CustomColor.pompAndPower)),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     enabledBorder: OutlineInputBorder(
@@ -138,7 +153,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   String newBio = bioController.text.trim();
 
                   // Crie uma nova instância de UserProfile com os dados atualizados
-                  UserProfile updatedProfile = UserProfile(
+                  ProfileModel updatedProfile = ProfileModel(
                     id: widget.userProfile.id,
                     username: newUsername,
                     email: newEmail,
@@ -148,11 +163,14 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   );
 
                   // Verificação de erros
-                  if (newUsername.isEmpty || newEmail.isEmpty || newPhoneNumber.isEmpty) {
+                  if (newUsername.isEmpty ||
+                      newEmail.isEmpty ||
+                      newPhoneNumber.isEmpty) {
                     // Exibe um SnackBar informando ao usuário que os campos são obrigatórios.
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
-                        content: Text('Por favor, preencha todos os campos obrigatórios.'),
+                        content: Text(
+                            'Por favor, preencha todos os campos obrigatórios.'),
                       ),
                     );
                     return;
@@ -161,7 +179,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   if (newUsername.length < 3 || newUsername.length > 20) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
-                        content: Text('O nome de usuário deve ter entre 3 e 20 caracteres.'),
+                        content: Text(
+                            'O nome de usuário deve ter entre 3 e 20 caracteres.'),
                       ),
                     );
                     return;
@@ -171,6 +190,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     if (str == null) return false;
                     return double.tryParse(str) != null;
                   }
+
                   String username = usernameController.text;
 
                   // Verifica se o nome de usuário tem pelo menos 3 caracteres não numéricos
@@ -182,7 +202,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   if (nonNumericCount < 3) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
-                        content: Text('O nome de usuário deve ter pelo menos 3 caracteres não numéricos.'),
+                        content: Text(
+                            'O nome de usuário deve ter pelo menos 3 caracteres não numéricos.'),
                       ),
                     );
                     return;
@@ -196,6 +217,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     // Use o método test do RegExp para verificar se o email coincide com o padrão
                     return emailRegExp.hasMatch(email);
                   }
+
                   String email = emailController.text;
 
                   if (!isEmailValid(email)) {
@@ -219,7 +241,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     // Exiba uma mensagem de erro para o usuário informando que o número de telefone é inválido.
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
-                        content: Text('Por favor, insira um número no formato (123)912345678.'),
+                        content: Text(
+                            'Por favor, insira um número no formato (123)912345678.'),
                       ),
                     );
                     return; // Retorna para evitar que o código continue a ser executado.
@@ -239,7 +262,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 },
                 // Cor do botão
                 style: ElevatedButton.styleFrom(
-                  primary: Color(CustomColor.pompAndPower), // Cor do fundo do botão
+                  primary:
+                      Color(CustomColor.pompAndPower), // Cor do fundo do botão
                   onPrimary: Colors.white, // Cor do texto do botão
                 ),
                 child: Text('Salvar Alterações'),

@@ -1,14 +1,15 @@
 import 'package:vwalltet/models/card_model.dart';
 
 class CardRepository {
-  static List<CardModel> list = [
+  List<CardModel> _list = [
     CardModel(
         cardholderName: 'Nome de Test',
         cardNumber: 'xxxx-xxxx-xxxx-xxxx',
         cvc: '00',
         expDate: DateTime.now(),
         alias: 'Alias Test',
-        issuer: Issuer.mastercard),
+        issuer: Issuer.mastercard,
+        ),
     CardModel(
         cardholderName: 'Nome de Test2',
         cardNumber: 'xxxx-xxxx-xxxx-xxxx',
@@ -17,4 +18,5 @@ class CardRepository {
         alias: 'Alias Test2',
         issuer: Issuer.visa),
   ];
+  List<CardModel> get list => _list;
 }

@@ -1,14 +1,17 @@
+import 'package:vwalltet/models/transaction_model.dart';
+
 enum Issuer { unknown, visa, mastercard }
 
 class CardModel {
-  String cardholderName;
+  final String cardholderName;
   String alias;
-  String cardNumber;
-  String cvc;
-  Issuer issuer;
-  DateTime expDate;
+  final String cardNumber;
+  final String cvc;
+  final Issuer issuer;
+  final DateTime expDate;
   double incoming;
   double expense;
+  List<TransactionModel> transactionList;
 
   CardModel(
       {required this.cardholderName,
@@ -16,6 +19,8 @@ class CardModel {
       required this.cardNumber,
       required this.cvc,
       required this.issuer,
-      required this.expDate})
-      : incoming = 0, expense = 0;
+      required this.expDate,})
+      : incoming = 0,
+      expense = 0, 
+      transactionList = [];
 }

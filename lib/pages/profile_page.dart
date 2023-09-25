@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import '../models/profile.dart';
+import '../models/profile_model.dart';
 import '../pages/edit_profile_page.dart';
 import './home_page.dart';
 
 class ProfilePage extends StatefulWidget {
-  final UserProfile userProfile;
+  final ProfileModel userProfile;
 
   ProfilePage({required this.userProfile});
 
@@ -13,7 +13,7 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  late UserProfile userProfile;
+  late ProfileModel userProfile;
 
   @override
   void initState() {
@@ -22,7 +22,7 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   // Função para atualizar userProfile quando retornar da página de edição de perfil
-  void updateProfile(UserProfile updatedProfile) {
+  void updateProfile(ProfileModel updatedProfile) {
     setState(() {
       userProfile = updatedProfile;
     });
@@ -99,7 +99,7 @@ class _ProfilePageState extends State<ProfilePage> {
               child: ElevatedButton(
                 onPressed: () async {
                   // Navegue para a tela de edição de perfil e aguarde os novos dados
-                  UserProfile? updatedProfile = await Navigator.push(
+                  ProfileModel? updatedProfile = await Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) =>

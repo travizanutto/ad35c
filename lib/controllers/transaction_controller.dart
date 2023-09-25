@@ -1,11 +1,11 @@
-import 'package:vwalltet/models/transaction.dart';
+import 'package:vwalltet/models/transaction_model.dart';
 
 class TransactionController {
-  late List<Transaction> transactionList;
+  late List<TransactionModel> transactionList;
 
   TransactionController() {
     transactionList = [
-      Transaction(
+      TransactionModel(
           name: "Teste", description: "01", price: 0.00, date: DateTime.now()),
     ];
   }

@@ -1,9 +1,7 @@
-import 'package:vwalltet/models/transaction.dart';
+import 'package:vwalltet/models/transaction_model.dart';
 
 class TransactionRepository {
-  final List<Transaction> _transactionList = [];
+  final List<TransactionModel> _transactionList = [];
 
   get transactionList => _transactionList;
-
-  
 }
