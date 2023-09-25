@@ -4,6 +4,7 @@ import '../pages/edit_profile_page.dart';
 import './home_page.dart';
 
 class ProfilePage extends StatefulWidget {
+
   final UserProfile userProfile;
 
   ProfilePage({required this.userProfile});
@@ -29,6 +30,7 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   @override
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -45,8 +47,10 @@ class _ProfilePageState extends State<ProfilePage> {
               padding: EdgeInsets.all(16.0),
               child: CircleAvatar(
                 radius: 60.0,
+
                 backgroundImage: AssetImage(widget.userProfile.profileImageUrl),
                 backgroundColor: const Color(CustomColor.EASports),
+
               ),
             ),
 
@@ -54,6 +58,7 @@ class _ProfilePageState extends State<ProfilePage> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.0),
               child: Text(
+
                 widget.userProfile.username,
                 style: TextStyle(
                   fontSize: 24.0,
@@ -75,7 +80,9 @@ class _ProfilePageState extends State<ProfilePage> {
             Padding(
               padding: EdgeInsets.all(16.0),
               child: Text(
+
                 widget.userProfile.bio,
+
                 style: TextStyle(fontSize: 16.0),
               ),
             ),
@@ -95,6 +102,7 @@ class _ProfilePageState extends State<ProfilePage> {
             Padding(
               padding: EdgeInsets.all(16.0),
               child: ElevatedButton(
+
                 onPressed: () async {
                   // Navegue para a tela de edição de perfil e aguarde os novos dados
                   UserProfile? updatedProfile = await Navigator.push(
