@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:vwalltet/repositories/card_repository.dart';
+import 'package:vwalltet/widgets/card_list_view.dart';
+import 'package:vwalltet/widgets/home_page_widgets.dart';
 import 'profile_page.dart';
 import '../models/profile_model.dart';
 
@@ -27,8 +29,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final cardList = CardRepository.list;
-
   @override
   void initState() {
     build(context);
@@ -39,83 +39,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: homePageAppBar(context),
-      body: ListView.separated(
-          itemBuilder: (BuildContext context, int index) {
-            return ListTile(
-              leading: SizedBox(
-                  width: 40,
-                  height: 40,
-                  child: SvgPicture.asset('assets/icons/mastercard_logo.svg')),
-              title: Text(cardList[index].alias),
-              trailing: SizedBox(
-                width: 100,
-                height: 20,
-                child: Row(
-                  children: [
-                    Text(
-                      //↓
-                      '↓\$${cardList[index].incoming}',
-                      style: TextStyle(color: Colors.green),
-                    ),
-                    Text(' | '),
-                    Text(
-                      //
-                      '↑\$${cardList[index].expense}',
-                      style: TextStyle(color: Colors.red),
-                    ),
-                  ],
-                ),
-              ),
-            );
-          },
-          separatorBuilder: (_, __) => const Divider(
-                indent: 16,
-                endIndent: 16,
-                thickness: 1.5,
-                color: Color(CustomColor.delftBlue),
-              ),
-          itemCount: cardList.length),
+      body: cardListView(),
     );
   }
-}
-
-Row appBarTitle() {
-  return const Row(
-    children: [
-      Text('Seus cartões',
-          style: TextStyle(
-            fontFamily: 'Metrophobic',
-            fontSize: 24,
-            color: Color.fromARGB(255, 255, 255, 255),
-          )),
-    ],
-  );
-}
-
-AppBar homePageAppBar(BuildContext context) {
-  return AppBar(
-    title: appBarTitle(),
-    centerTitle: false,
-    backgroundColor: const Color(CustomColor.delftBlue),
-    actions: [
-      GestureDetector(
-        onTap: () {
-          // Navegue para a ProfilePage quando o ícone for tocado.
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => ProfilePage(userProfile: userProfile),
-            ),
-          );
-        },
-        child: Container(
-          margin: const EdgeInsets.all(10),
-          width: 30,
-          height: 30,
-          child: SvgPicture.asset('assets/icons/man_pp.svg'),
-        ),
-      ),
-    ],
-    elevation: 0,
-  );
 }
