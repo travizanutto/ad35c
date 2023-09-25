@@ -14,7 +14,11 @@ class CardController extends GetxController {
   final _cardList = <CardModel>[].obs;
   get cardList => _cardList;
   set cardList(list) => cardList.value = list;
-
+  /* incoming e expense sera requisitado ao banco posteriomente
+  por enquanto hard coded 
+  get cardIncoming => ...;
+  get cardExpense => ...;
+  */
   // devera fazer requisao ao banco posteriomente(*talvez*)
   initCardList() {
     cardList = repository.list;

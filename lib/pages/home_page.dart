@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:vwalltet/pages/card_mang_page.dart';
+import 'package:vwalltet/pages/card_add_page.dart';
 import 'package:vwalltet/repositories/card_repository.dart';
 import 'package:vwalltet/widgets/card_list_view.dart';
 import 'package:vwalltet/widgets/home_page_widgets.dart';
@@ -44,13 +44,13 @@ class _HomePageState extends State<HomePage> {
       body: CardListView(),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          Get.to(() => CardManagerPage(), fullscreenDialog: true);
+          Get.to(() => CardAddPage(), fullscreenDialog: true);
         },
-        label: Text(
+        label: const Text(
           'ADICIONAR',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
-        backgroundColor: Color(CustomColor.delftBlue),
+        backgroundColor: const Color(CustomColor.delftBlue),
       ),
     );
   }

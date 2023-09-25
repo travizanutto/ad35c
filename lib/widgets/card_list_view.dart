@@ -5,8 +5,10 @@ import 'package:intl/intl.dart';
 import 'package:vwalltet/controllers/card_controller.dart';
 import 'package:vwalltet/pages/home_page.dart';
 
-class CardListView extends GetView<CardController> {
+class CardListView extends StatelessWidget {
   final currencyFormat = NumberFormat.currency(locale: 'pt_BR', name: 'R\$');
+  @override
+  final controller = Get.put(CardController());
 
   @override
   Widget build(BuildContext context) {
