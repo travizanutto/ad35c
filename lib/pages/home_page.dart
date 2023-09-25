@@ -41,10 +41,10 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: homePageAppBar(context),
-      body: cardListView(),
+      body: CardListView(),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          Get.to(CardManagerPage());
+          Get.to(() => CardManagerPage(), fullscreenDialog: true);
         },
         label: Text(
           'ADICIONAR',
