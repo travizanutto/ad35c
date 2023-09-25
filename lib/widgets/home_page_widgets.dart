@@ -25,7 +25,7 @@ AppBar homePageAppBar(BuildContext context) {
     actions: [
       GestureDetector(
         onTap: () {
-          Get.to(ProfilePage(userProfile: userProfile));
+          Get.to(() => ProfilePage(userProfile: userProfile));
         },
         child: Container(
           margin: const EdgeInsets.all(10),
