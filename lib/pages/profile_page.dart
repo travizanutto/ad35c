@@ -1,16 +1,39 @@
 import 'package:flutter/material.dart';
 import '../models/profile.dart';
+import '../pages/edit_profile_page.dart';
+import './home_page.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   final UserProfile userProfile;
 
   ProfilePage({required this.userProfile});
+
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  late UserProfile userProfile;
+
+  @override
+  void initState() {
+    super.initState();
+    userProfile = widget.userProfile; // Inicialize userProfile no initState
+  }
+
+  // Função para atualizar userProfile quando retornar da página de edição de perfil
+  void updateProfile(UserProfile updatedProfile) {
+    setState(() {
+      userProfile = updatedProfile;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Meu Perfil'),
+        backgroundColor: const Color(CustomColor.pompAndPower),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -22,7 +45,8 @@ class ProfilePage extends StatelessWidget {
               padding: EdgeInsets.all(16.0),
               child: CircleAvatar(
                 radius: 60.0,
-                backgroundImage: AssetImage(userProfile.profileImageUrl),
+                backgroundImage: AssetImage(widget.userProfile.profileImageUrl),
+                backgroundColor: const Color(CustomColor.EASports),
               ),
             ),
 
@@ -30,7 +54,7 @@ class ProfilePage extends StatelessWidget {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.0),
               child: Text(
-                userProfile.username,
+                widget.userProfile.username,
                 style: TextStyle(
                   fontSize: 24.0,
                   fontWeight: FontWeight.bold,
@@ -42,7 +66,7 @@ class ProfilePage extends StatelessWidget {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.0),
               child: Text(
-                'Email: ${userProfile.email}\nTelefone: ${userProfile.phoneNumber}',
+                'Email: ${widget.userProfile.email}\nTelefone: ${widget.userProfile.phoneNumber}',
                 style: TextStyle(fontSize: 16.0),
               ),
             ),
@@ -51,7 +75,7 @@ class ProfilePage extends StatelessWidget {
             Padding(
               padding: EdgeInsets.all(16.0),
               child: Text(
-                userProfile.bio,
+                widget.userProfile.bio,
                 style: TextStyle(fontSize: 16.0),
               ),
             ),
@@ -71,12 +95,29 @@ class ProfilePage extends StatelessWidget {
             Padding(
               padding: EdgeInsets.all(16.0),
               child: ElevatedButton(
-                onPressed: () {
-                  // Adicionar ação para editar o perfil aqui
+                onPressed: () async {
+                  // Navegue para a tela de edição de perfil e aguarde os novos dados
+                  UserProfile? updatedProfile = await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => EditProfilePage(userProfile: userProfile),
+                    ),
+                  );
+
+                  // Verifique se há dados atualizados e atualize a interface do usuário
+                  if (updatedProfile != null) {
+                    updateProfile(updatedProfile);
+                  }
                 },
+                // Cor do botão
+                style: ElevatedButton.styleFrom(
+                  primary: Color(CustomColor.pompAndPower), // Cor do fundo do botão
+                  onPrimary: Colors.white, // Cor do texto do botão
+                ),
                 child: Text('Editar Perfil'),
               ),
-            ),
+            )
+
 
             // 8. Configurações do Perfil
 
