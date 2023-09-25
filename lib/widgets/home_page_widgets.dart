@@ -1,6 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:vwalltet/pages/home_page.dart';
 import 'package:vwalltet/pages/profile_page.dart';
 
@@ -25,13 +25,7 @@ AppBar homePageAppBar(BuildContext context) {
     actions: [
       GestureDetector(
         onTap: () {
-          // Navegue para a ProfilePage quando o ícone for tocado.
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => ProfilePage(userProfile: userProfile),
-            ),
-          );
+          Get.to(ProfilePage(userProfile: userProfile));
         },
         child: Container(
           margin: const EdgeInsets.all(10),
