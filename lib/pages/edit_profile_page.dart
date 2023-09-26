@@ -8,7 +8,7 @@ class EditProfilePage extends StatefulWidget {
   const EditProfilePage({required this.userProfile, super.key});
 
   @override
-  _EditProfilePageState createState() => _EditProfilePageState();
+  State<EditProfilePage> createState() => _EditProfilePageState();
 }
 
 final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey =

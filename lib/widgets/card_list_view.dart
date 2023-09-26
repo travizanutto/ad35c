@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:vwalltet/controllers/card_controller.dart';
+import 'package:vwalltet/pages/card_mangage_page.dart';
 import 'package:vwalltet/pages/home_page.dart';
 
 class CardListView extends StatelessWidget {
@@ -42,6 +43,7 @@ class CardListView extends StatelessWidget {
                 ],
               ),
             ),
+            onTap: () => Get.to(() => CardManagePage()),
           );
         },
         separatorBuilder: (_, __) => const Divider(
