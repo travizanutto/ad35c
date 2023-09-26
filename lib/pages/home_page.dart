@@ -17,7 +17,7 @@ ProfileModel userProfile = ProfileModel(
   id: 'userId',
   username: 'NomeDeUsuario',
   email: 'usuario@example.com',
-  phoneNumber: '(123) 456-7890',
+  phoneNumber: '123912345678',
   bio: 'Descrição do usuário',
   profileImageUrl: 'assets/profile_image.jpg',
 );
