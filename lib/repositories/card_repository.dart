@@ -4,9 +4,9 @@ class CardRepository {
   final List<CardModel> _list = [
     CardModel(
       cardholderName: 'Pessoa X',
-      cardNumber: 'xxxx-xxxx-xxxx-xxxx',
-      cvc: '00',
-      expDate: '',
+      cardNumber: 'XXXX XXXX XXXX XXXX',
+      cvc: '000',
+      expDate: '00/00',
       alias: 'Debito BancoX',
       issuer: Issuer.mastercard,
     ),

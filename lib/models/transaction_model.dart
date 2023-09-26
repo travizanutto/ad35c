@@ -2,7 +2,7 @@ class TransactionModel {
   String name;
   String description;
   double price;
-  DateTime date;
+  String date;
 
   TransactionModel(
       {required this.name,

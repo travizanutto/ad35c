@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:vwalltet/pages/card_add_page.dart';
+import 'package:vwalltet/pages/card_form_page.dart';
 import 'package:vwalltet/widgets/card_list_view.dart';
 import 'package:vwalltet/widgets/home_page_widgets.dart';
 import '../models/profile_model.dart';
@@ -43,7 +43,7 @@ class _HomePageState extends State<HomePage> {
       body: CardListView(),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          Get.to(() => CardAddPage(), fullscreenDialog: true);
+          Get.to(() => CardFormPage(), fullscreenDialog: true);
         },
         label: const Text(
           'ADICIONAR',

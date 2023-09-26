@@ -3,19 +3,20 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:vwalltet/controllers/card_controller.dart';
-import 'package:vwalltet/pages/card_mangage_page.dart';
+import 'package:vwalltet/pages/card_edit_page.dart';
+import 'package:vwalltet/pages/card_manage_page.dart';
 import 'package:vwalltet/pages/home_page.dart';
 
 class CardListView extends StatelessWidget {
   final currencyFormat = NumberFormat.currency(locale: 'pt_BR', name: 'R\$');
-  final controller = Get.put(CardController());
+  final controller = Get.find<CardController>();
 
   CardListView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Obx(
-      ()=> ListView.separated(
+      () => ListView.separated(
         itemBuilder: (BuildContext context, int index) {
           return ListTile(
             leading: SizedBox(
@@ -43,7 +44,16 @@ class CardListView extends StatelessWidget {
                 ],
               ),
             ),
-            onTap: () => Get.to(() => CardManagePage()),
+            onTap: () => Get.to(
+              () => CardManagePage(
+                cardIndex: index,
+              ),
+            ),
+            onLongPress: () => Get.to(
+              () => CardEditPage(
+                cardIndex: index,
+              ),
+            ),
           );
         },
         separatorBuilder: (_, __) => const Divider(
