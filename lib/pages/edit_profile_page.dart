@@ -1,25 +1,24 @@
+import 'package:credit_card_validator/regexs.dart';
 import 'package:flutter/material.dart';
-import '../models/profile_model.dart';
-import 'home_page.dart';
+import 'package:vwalltet/models/profile_model.dart';
+import 'package:vwalltet/pages/home_page.dart';
 
 class EditProfilePage extends StatefulWidget {
   final ProfileModel userProfile;
 
-  const EditProfilePage({required this.userProfile, super.key});
+  const EditProfilePage({required this.userProfile, Key? key}) : super(key: key);
 
   @override
-  State<EditProfilePage> createState() => _EditProfilePageState();
+  _EditProfilePageState createState() => _EditProfilePageState();
 }
 
-final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey =
-    GlobalKey<ScaffoldMessengerState>();
-
 class _EditProfilePageState extends State<EditProfilePage> {
-  // Variáveis para controlar os campos de edição
-  TextEditingController usernameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController phoneNumberController = TextEditingController();
-  TextEditingController bioController = TextEditingController();
+  final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey =
+      GlobalKey<ScaffoldMessengerState>();
+  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController phoneNumberController = TextEditingController();
+  final TextEditingController bioController = TextEditingController();
 
   @override
   void initState() {
@@ -37,122 +36,97 @@ class _EditProfilePageState extends State<EditProfilePage> {
       key: _scaffoldMessengerKey,
       appBar: AppBar(
         title: const Text('Editar Perfil'),
-        backgroundColor: const Color(CustomColor.pompAndPower),
+        backgroundColor: const Color(CustomColor.delftBlue),
       ),
-      body: Form(
-        child: SingleChildScrollView(
-          padding:
-              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-          child: Column(
-            children: [
-              Container(
-                margin: const EdgeInsets.only(
-                    top: 16.0), // Espaçamento acima do campo "Nome de Usuário"
-                child: TextFormField(
-                  controller: usernameController,
-                  keyboardType: TextInputType.name,
-                  decoration: InputDecoration(
-                    labelText: 'Nome de Usuário',
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(
-                          color: Color(CustomColor.pompAndPower)),
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(2.0),
-                    ),
-                  ),
-                ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: buildTextFormField(
+                controller: usernameController,
+                label: 'Nome de Usuário',
+                keyboardType: TextInputType.name,
+                maxLength: 20,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Este campo é obrigatório';
+                  }
+                  return null;
+                },
               ),
-              Container(
-                margin: const EdgeInsets.only(
-                    top: 16.0), // Espaçamento acima do campo "Email"
-                child: TextFormField(
-                  controller: emailController,
-                  decoration: InputDecoration(
-                    labelText: 'Email',
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(
-                          color: Color(CustomColor.pompAndPower)),
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(2.0),
-                    ),
-                  ),
-                ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: buildTextFormField(
+                controller: emailController,
+                label: 'Email',
+                maxLength: 36,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Este campo é obrigatório';
+                  }
+                  if (!isEmailValid(value)) {
+                    return 'O email inserido não é válido.';
+                  }
+                  return null;
+                },
               ),
-              Container(
-                margin: const EdgeInsets.only(
-                    top:
-                        16.0), // Espaçamento acima do campo "Número de Telefone"
-                child: TextFormField(
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),   
+                child: buildTextFormField(
                   controller: phoneNumberController,
+                  label: 'Número de Telefone',
                   keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    labelText: 'Número de Telefone',
-                    hintText: '(___)________',
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(
-                          color: Color(CustomColor.pompAndPower)),
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(2.0),
-                    ),
-                    // Define o mínimo de caracteres
-                    counterText: '', // Remove o contador de caracteres padrão
-                    counterStyle: const TextStyle(
-                        fontSize:
-                            0), // Remove o estilo do contador de caracteres
-                    helperText:
-                        'Mínimo e máximo de 12 caracteres', // Mensagem de ajuda
-                    helperStyle:
-                        const TextStyle(fontSize: 12, color: Colors.grey),
-                  ),
-                  maxLength: 12, // Define o número máximo de caracteres
+                  hintText: '(___)_________',
+                  maxLength: 12,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Este campo é obrigatório';
-                    } else if (value.length < 12) {
-                      return 'Mínimo de 12 caracteres';
-                    } else if (value.length > 12) {
-                      return 'Máximo de 12 caracteres';
                     }
-                    return null; // Retorna null se a validação for bem-sucedida
+                    if (!isValidPhoneNumber(value)) {
+                      return 'Por favor, insira um número no formato (123)912345678.';
+                    }
+                    return null;
                   },
                 ),
+              ),           
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: buildTextFormField(
+                controller: bioController,
+                label: 'Biografia',
               ),
-              Container(
-                margin: const EdgeInsets.only(
-                    top: 16.0), // Espaçamento acima do campo "Biografia"
-                child: TextFormField(
-                  controller: bioController,
-                  decoration: InputDecoration(
-                    labelText: 'Biografia',
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(
-                          color: Color(CustomColor.pompAndPower)),
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(2.0),
-                    ),
-                  ),
-                ),
-              ),
+            ),
               ElevatedButton(
-                onPressed: () {
-                  String newUsername = usernameController.text.trim();
-                  String newEmail = emailController.text.trim();
-                  String newPhoneNumber = phoneNumberController.text.trim();
-                  String newBio = bioController.text.trim();
+                onPressed: () async {
+                  String newUsername = usernameController.text;
+                  String newEmail = emailController.text;
+                  String newPhoneNumber = phoneNumberController.text;
+                  String newBio = bioController.text;
 
-                  // Crie uma nova instância de UserProfile com os dados atualizados
+                  // Validação de comprimento mínimo e máximo
+                  if (!isUsernameSizeValid(newUsername)) {
+                    showSnackBar('O nome de usuário deve ter entre 3 e 20 caracteres.');
+                    return;
+                  }
+                  // Validação de caracteres não numéricos
+                  if (!countNonNumericCharacters(newUsername)) {
+                    showSnackBar('O nome de usuário deve ter pelo menos 3 caracteres não numéricos.');
+                    return;
+                  }
+                  //Validação de email
+                  if (!isEmailValid(newEmail)) {
+                    showSnackBar('O email inserido não é válido.');
+                    return;
+                  }
+                  // Validação de número de telefone
+                  if (!isValidPhoneNumber(newPhoneNumber)) {
+                    showSnackBar('Por favor, insira um número no formato (123)912345678.');
+                    return;
+                  }
+
                   ProfileModel updatedProfile = ProfileModel(
                     id: widget.userProfile.id,
                     username: newUsername,
@@ -162,114 +136,93 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     profileImageUrl: widget.userProfile.profileImageUrl,
                   );
 
-                  // Verificação de erros
-                  if (newUsername.isEmpty ||
-                      newEmail.isEmpty ||
-                      newPhoneNumber.isEmpty) {
-                    // Exibe um SnackBar informando ao usuário que os campos são obrigatórios.
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text(
-                            'Por favor, preencha todos os campos obrigatórios.'),
-                      ),
-                    );
-                    return;
-                  }
-                  // Validação de comprimento mínimo e máximo
-                  if (newUsername.length < 3 || newUsername.length > 20) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text(
-                            'O nome de usuário deve ter entre 3 e 20 caracteres.'),
-                      ),
-                    );
-                    return;
-                  }
-                  // Função para verificar se o caractere é numérico
-                  bool isNumeric(String str) {
-                    return double.tryParse(str) != null;
-                  }
-
-                  String username = usernameController.text;
-
-                  // Verifica se o nome de usuário tem pelo menos 3 caracteres não numéricos
-                  int nonNumericCount = 0;
-                  for (int i = 0; i < username.length; i++) {
-                    if (!isNumeric(username[i])) nonNumericCount++;
-                  }
-
-                  if (nonNumericCount < 3) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text(
-                            'O nome de usuário deve ter pelo menos 3 caracteres não numéricos.'),
-                      ),
-                    );
-                    return;
-                  }
-                  bool isEmailValid(String email) {
-                    // Padrão de regex para verificar o formato de um email
-                    final emailRegExp = RegExp(
-                      r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$',
-                    );
-
-                    // Use o método test do RegExp para verificar se o email coincide com o padrão
-                    return emailRegExp.hasMatch(email);
-                  }
-
-                  String email = emailController.text;
-
-                  if (!isEmailValid(email)) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('O email inserido não é válido.'),
-                      ),
-                    );
-                    return;
-                  }
-
-                  bool isValidPhoneNumber(String phoneNumber) {
-                    // Crie uma expressão regular para o formato "(123)912345678"
-                    final RegExp phoneRegex = RegExp(r'^\d{12}$');
-
-                    // Use a expressão regular para verificar o número de telefone
-                    return phoneRegex.hasMatch(phoneNumber);
-                  }
-
-                  if (!isValidPhoneNumber(newPhoneNumber)) {
-                    // Exiba uma mensagem de erro para o usuário informando que o número de telefone é inválido.
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text(
-                            'Por favor, insira um número no formato (123)912345678.'),
-                      ),
-                    );
-                    return; // Retorna para evitar que o código continue a ser executado.
-                  }
-
                   // Atualiza o perfil
-                  widget.userProfile.username = newUsername;
-                  widget.userProfile.email = newEmail;
-                  widget.userProfile.phoneNumber = newPhoneNumber;
-                  widget.userProfile.bio = newBio;
+                  setState(() {
+                    widget.userProfile.username = newUsername;
+                    widget.userProfile.email = newEmail;
+                    widget.userProfile.phoneNumber = newPhoneNumber;
+                    widget.userProfile.bio = newBio;
+                  });
 
                   // Retorna os novos dados do perfil para a página anterior
-                  setState(() {});
-
-                  // Navegue de volta para a tela de perfil
                   Navigator.pop(context, updatedProfile);
                 },
-                // Cor do botão
                 style: ElevatedButton.styleFrom(
-                  backgroundColor:
-                      const Color(CustomColor.pompAndPower), // Cor do fundo do botão
-                  foregroundColor: Colors.white, // Cor do texto do botão
+                  backgroundColor: const Color(CustomColor.delftBlue),
+                  foregroundColor: Colors.white,
                 ),
                 child: const Text('Salvar Alterações'),
               ),
             ],
           ),
         ),
+      );
+  }
+
+  TextFormField buildTextFormField({
+    required TextEditingController controller,
+    required String label,
+    TextInputType? keyboardType,
+    String? hintText,
+    int? maxLength,
+    String? Function(String?)? validator,
+  }) {
+    return TextFormField(
+      controller: controller,
+      keyboardType: keyboardType,
+      decoration: InputDecoration(
+        labelText: label,
+        focusedBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: Color(CustomColor.pompAndPower)),
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: Colors.grey),
+          borderRadius: BorderRadius.circular(2.0),
+        ),
+        hintText: hintText,
+      ),
+      maxLength: maxLength,
+      validator: validator,
+    );
+  }
+
+bool isUsernameSizeValid(String username) {
+    if (username.length < 3) return false;
+    else return true;
+  }
+
+  bool countNonNumericCharacters(String value) {
+    int nonNumericCount = 0;
+    for (int i = 0; i < value.length; i++) {
+      if (!isNumeric(value[i])) nonNumericCount++;
+    }
+    if (nonNumericCount < 3) return false;
+    else return true;
+  }
+
+  bool isEmailValid(String email) {
+    email = email.trim();
+
+    final emailRegExp = RegExp(
+      r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$',
+    );
+    return emailRegExp.hasMatch(email);
+  }
+
+  bool isValidPhoneNumber(String phoneNumber) {
+    final RegExp phoneRegex = RegExp(r'^\d{12}$');
+    return phoneRegex.hasMatch(phoneNumber);
+  }
+
+  bool isNumeric(String str) {
+    return double.tryParse(str) != null;
+  }
+
+  void showSnackBar(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
       ),
     );
   }

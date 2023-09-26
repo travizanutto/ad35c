@@ -33,7 +33,7 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Meu Perfil'),
-        backgroundColor: const Color(CustomColor.pompAndPower),
+        backgroundColor: const Color(CustomColor.delftBlue),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -115,7 +115,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 // Cor do botão
                 style: ElevatedButton.styleFrom(
                   backgroundColor:
-                      const Color(CustomColor.pompAndPower), // Cor do fundo do botão
+                      const Color(CustomColor.delftBlue), // Cor do fundo do botão
                   foregroundColor: Colors.white, // Cor do texto do botão
                 ),
                 child: const Text('Editar Perfil'),
