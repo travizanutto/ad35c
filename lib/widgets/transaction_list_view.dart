@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:vwalltet/controllers/card_controller.dart';
 import 'package:vwalltet/models/card_model.dart';
 import 'package:vwalltet/pages/home_page.dart';
+import 'package:vwalltet/pages/transaction_edit_page.dart';
 
 class TransactionListView extends StatelessWidget {
   final currencyFormat = NumberFormat.currency(locale: 'pt_BR', name: 'R\$');
@@ -33,7 +34,7 @@ class TransactionListView extends StatelessWidget {
                   : const TextStyle(color: Colors.green),
             ),
             onTap: () => Get.to(
-                  (),
+                  TransactionEditPage(cardIndex: cardIndex, transactionIndex: index),
                 ));
       },
       separatorBuilder: (_, __) => const Divider(
