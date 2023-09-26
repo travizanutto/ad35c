@@ -128,7 +128,7 @@ class CardEditPage extends CardFormPage {
       floatingActionButton: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
           FloatingActionButton.extended(
             heroTag: "btn1",
@@ -153,6 +153,7 @@ class CardEditPage extends CardFormPage {
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
+          const SizedBox(width: 10,),
           FloatingActionButton.extended(
             heroTag: "btn2",
             onPressed: () {

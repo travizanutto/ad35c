@@ -24,9 +24,9 @@ class CardListView extends StatelessWidget {
                 height: 40,
                 child: SvgPicture.asset('assets/icons/mastercard_logo.svg')),
             title: Text(controller.cardList[index].alias),
-            trailing: SizedBox(
+            trailing: const SizedBox(
               width: 150,
-              height: 20,
+              height: 20,/*
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -42,7 +42,7 @@ class CardListView extends StatelessWidget {
                     style: const TextStyle(color: Colors.red),
                   ),
                 ],
-              ),
+              ),*/
             ),
             onTap: () => Get.to(
               () => CardManagePage(

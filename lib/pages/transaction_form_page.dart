@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vwalltet/controllers/card_controller.dart';
-import 'package:vwalltet/models/card_model.dart';
+import 'package:vwalltet/models/transaction_model.dart';
 import 'package:vwalltet/pages/home_page.dart';
 import 'package:vwalltet/widgets/std_form.dart';
 
 class TransactionFormPage extends StatelessWidget {
-  TransactionFormPage({super.key});
+  TransactionFormPage({super.key, required this.cardIndex});
 
   final formKey = GlobalKey<FormState>();
   final name = TextEditingController();
   final description = TextEditingController();
   final price = TextEditingController();
   final date = TextEditingController();
+  final int cardIndex;
 
   @override
   Widget build(BuildContext context) {
@@ -98,6 +99,12 @@ class TransactionFormPage extends StatelessWidget {
         onPressed: () {
           if (formKey.currentState!.validate()) {
             final controller = Get.put(CardController());
+            final transaction = TransactionModel(
+                name: name.text,
+                description: description.text,
+                price: double.parse(price.text),
+                date: date.text);
+            controller.cardList[cardIndex].transactionList.add(transaction);
             controller.cardList.refresh();
             Get.back();
           }
