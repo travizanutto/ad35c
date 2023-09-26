@@ -25,6 +25,8 @@ class CardController extends GetxController {
   initCardList() {
     cardList = repository.list;
     cardList[0].transactionList.add(TransactionModel(
-        name: 'Teste', description: 'Descricao', price: -15, date: 'date'));
+        name: 'Teste', description: 'Valor negativo', price: -15, date: 'date'));
+    cardList[0].transactionList.add(TransactionModel(
+        name: 'Teste 2', description: 'Valor positivo', price: 15, date: 'date'));
   }
 }

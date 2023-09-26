@@ -44,11 +44,12 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           Get.to(() => CardFormPage(), fullscreenDialog: true);
-        },
+        },/*
         label: const Text(
           'ADICIONAR',
           style: TextStyle(fontWeight: FontWeight.bold),
-        ),
+        ),*/
+        label: const Icon(Icons.add_card),
         backgroundColor: const Color(CustomColor.delftBlue),
       ),
     );

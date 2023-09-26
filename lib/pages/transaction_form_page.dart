@@ -9,12 +9,10 @@ class TransactionFormPage extends StatelessWidget {
   TransactionFormPage({super.key});
 
   final formKey = GlobalKey<FormState>();
-  final cardholderName = TextEditingController();
-  final alias = TextEditingController();
-  final cardNumber = TextEditingController();
-  final cvc = TextEditingController();
-  //final issuer = DropdownMenuItem(child: child)
-  final expDate = TextEditingController();
+  final name = TextEditingController();
+  final description = TextEditingController();
+  final price = TextEditingController();
+  final date = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -30,11 +28,11 @@ class TransactionFormPage extends StatelessWidget {
             child: Column(
               children: [
                 TextFormField(
-                  controller: alias,
-                  decoration: stdInputDecoration('Nome de exibição'),
+                  controller: name,
+                  decoration: stdInputDecoration('Nome da transação'),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'O cartão precisa de um nome.';
+                      return 'A transação precisa de um nome.';
                     }
                     return null;
                   },
@@ -43,28 +41,11 @@ class TransactionFormPage extends StatelessWidget {
                   height: 5,
                 ),
                 TextFormField(
-                  controller: cardholderName,
-                  decoration: stdInputDecoration('Nome do titular'),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Nome do titular inválido.';
-                    }
-                    return null;
-                  },
+                  controller: description,
+                  decoration: stdInputDecoration('Descrição'),
                 ),
                 const SizedBox(
                   height: 5,
-                ),
-                TextFormField(
-                  controller: cardNumber,
-                  decoration: stdInputDecoration('Número do cartão'),
-                  keyboardType: TextInputType.number,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Número inválido.';
-                    }
-                    return null;
-                  },
                 ),
                 const SizedBox(
                   height: 5,
@@ -74,32 +55,26 @@ class TransactionFormPage extends StatelessWidget {
                     SizedBox(
                       width: context.width / 2 - 16,
                       child: TextFormField(
-                        controller: cvc,
-                        decoration: stdInputDecoration('Código CVC'),
+                        controller: price,
+                        decoration: stdInputDecoration('Preço'),
                         keyboardType: TextInputType.number,
                         validator: (value) {
-                          if (value == null || value.isEmpty || value.length < 3) {
-                            return 'CVC inválido.';
+                          if (value == null || value.isEmpty) {
+                            return 'Preço inválido.';
                           }
                           return null;
-                        },
-                        onChanged: (String? value) {
-                          if (value == null || value.isEmpty) return;
-                          if (value.length > 3) {
-                            cvc.text = value.substring(0, 3);
-                          }
                         },
                       ),
                     ),
                     SizedBox(
                       width: context.width / 2 - 16,
                       child: TextFormField(
-                        controller: expDate,
-                        decoration: stdInputDecoration('Data de vencimento'),
+                        controller: date,
+                        decoration: stdInputDecoration('Data da transação'),
                         keyboardType: TextInputType.number,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Data de vencimento inválida.';
+                            return 'Data inválida.';
                           }
                           return null;
                         },
@@ -123,16 +98,6 @@ class TransactionFormPage extends StatelessWidget {
         onPressed: () {
           if (formKey.currentState!.validate()) {
             final controller = Get.put(CardController());
-            controller.cardList.add(
-              CardModel(
-                cardholderName: cardholderName.text,
-                cardNumber: cardNumber.text,
-                cvc: cvc.text,
-                expDate: expDate.text,
-                alias: alias.text,
-                issuer: Issuer.mastercard,
-              ),
-            );
             controller.cardList.refresh();
             Get.back();
           }

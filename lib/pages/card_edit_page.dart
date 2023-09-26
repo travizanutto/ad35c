@@ -125,28 +125,54 @@ class CardEditPage extends CardFormPage {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          if (formKey.currentState!.validate()) {
-            final controller = Get.put(CardController());
-            controller.cardList[cardIndex] = CardModel(
-              cardholderName: cardholderName.text,
-              alias: alias.text,
-              cardNumber: cardNumber.text,
-              cvc: cvc.text,
-              issuer: card.issuer,
-              expDate: expDate.text,
-            );
-            controller.cardList.refresh();
-            Get.back();
-          }
-        },
-        backgroundColor: const Color(CustomColor.delftBlue),
-        label: const Text(
-          'SALVAR',
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+          FloatingActionButton.extended(
+            heroTag: "btn1",
+            onPressed: () {
+              if (formKey.currentState!.validate()) {
+                final controller = Get.put(CardController());
+                controller.cardList[cardIndex] = CardModel(
+                  cardholderName: cardholderName.text,
+                  alias: alias.text,
+                  cardNumber: cardNumber.text,
+                  cvc: cvc.text,
+                  issuer: card.issuer,
+                  expDate: expDate.text,
+                );
+                controller.cardList.refresh();
+                Get.back();
+              }
+            },
+            backgroundColor: const Color(CustomColor.delftBlue),
+            label: const Text(
+              'SALVAR',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ),
+          FloatingActionButton.extended(
+            heroTag: "btn2",
+            onPressed: () {
+              if (formKey.currentState!.validate()) {
+                final controller = Get.put(CardController());
+                controller.cardList.removeAt(cardIndex);
+                controller.cardList.refresh();
+                Get.back();
+              }
+            },
+            backgroundColor: const Color.fromARGB(200, 200, 0, 0),
+            label: const Text(
+              'EXCLUIR',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ),
+          ]
       ),
+      ),
+      
     );
   }
 }

@@ -12,4 +12,5 @@ class CardRepository {
     ),
   ];
   List<CardModel> get list => _list;
+  
 }

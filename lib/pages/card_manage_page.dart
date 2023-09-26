@@ -24,11 +24,12 @@ class CardManagePage extends StatelessWidget {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.miniEndFloat,
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton.extended(
         onPressed: () => Get.to(
           TransactionFormPage(),
         ),
         backgroundColor: const Color(CustomColor.delftBlue),
+        label: const Icon(Icons.add),
       ),
     );
   }
