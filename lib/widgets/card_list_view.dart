@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+//import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:vwalltet/controllers/card_controller.dart';
@@ -19,14 +19,14 @@ class CardListView extends StatelessWidget {
       () => ListView.separated(
         itemBuilder: (BuildContext context, int index) {
           return ListTile(
-            leading: SizedBox(
-                width: 40,
-                height: 40,
-                child: SvgPicture.asset('assets/icons/mastercard_logo.svg')),
+            leading: const SizedBox(
+                width: 40, height: 40, child: Icon(Icons.credit_card)),
+            //child: SvgPicture.asset('assets/icons/mastercard_logo.svg')),
             title: Text(controller.cardList[index].alias),
             trailing: const SizedBox(
               width: 150,
-              height: 20,/*
+              height:
+                  20, /*
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
