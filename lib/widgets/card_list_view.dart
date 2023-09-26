@@ -7,8 +7,9 @@ import 'package:vwalltet/pages/home_page.dart';
 
 class CardListView extends StatelessWidget {
   final currencyFormat = NumberFormat.currency(locale: 'pt_BR', name: 'R\$');
-  @override
   final controller = Get.put(CardController());
+
+  CardListView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,13 +31,13 @@ class CardListView extends StatelessWidget {
                   Text(
                     //↓
                     '↓${currencyFormat.format(controller.cardList[index].incoming)}',
-                    style: TextStyle(color: Colors.green),
+                    style: const TextStyle(color: Colors.green),
                   ),
-                  Text(' | '),
+                  const Text(' | '),
                   Text(
                     //
                     '↑${currencyFormat.format(controller.cardList[index].expense)}',
-                    style: TextStyle(color: Colors.red),
+                    style: const TextStyle(color: Colors.red),
                   ),
                 ],
               ),

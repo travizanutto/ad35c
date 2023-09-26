@@ -39,6 +39,7 @@ dependencies:
   intl:
   get:
   flutter_credit_card:
+  credit_card_validator:
 
 dev_dependencies:
   flutter_test:

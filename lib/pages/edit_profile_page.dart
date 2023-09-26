@@ -5,7 +5,7 @@ import 'home_page.dart';
 class EditProfilePage extends StatefulWidget {
   final ProfileModel userProfile;
 
-  EditProfilePage({required this.userProfile});
+  const EditProfilePage({required this.userProfile, super.key});
 
   @override
   _EditProfilePageState createState() => _EditProfilePageState();
@@ -187,7 +187,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   }
                   // Função para verificar se o caractere é numérico
                   bool isNumeric(String str) {
-                    if (str == null) return false;
                     return double.tryParse(str) != null;
                   }
 
@@ -262,11 +261,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 },
                 // Cor do botão
                 style: ElevatedButton.styleFrom(
-                  primary:
-                      Color(CustomColor.pompAndPower), // Cor do fundo do botão
-                  onPrimary: Colors.white, // Cor do texto do botão
+                  backgroundColor:
+                      const Color(CustomColor.pompAndPower), // Cor do fundo do botão
+                  foregroundColor: Colors.white, // Cor do texto do botão
                 ),
-                child: Text('Salvar Alterações'),
+                child: const Text('Salvar Alterações'),
               ),
             ],
           ),

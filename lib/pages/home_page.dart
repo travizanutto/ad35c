@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:vwalltet/pages/card_add_page.dart';
-import 'package:vwalltet/repositories/card_repository.dart';
 import 'package:vwalltet/widgets/card_list_view.dart';
 import 'package:vwalltet/widgets/home_page_widgets.dart';
-import 'profile_page.dart';
 import '../models/profile_model.dart';
 
 class CustomColor {
@@ -13,7 +10,7 @@ class CustomColor {
   static const delftBlue = 0xff313d5a;
   static const pompAndPower = 0xff73628a;
   static const periwinkle = 0xffcbc5ea;
-  static const EASports = 0xffeaeaea;
+  static const eASports = 0xffeaeaea;
 }
 
 ProfileModel userProfile = ProfileModel(
@@ -26,6 +23,8 @@ ProfileModel userProfile = ProfileModel(
 );
 
 class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
   @override
   State<HomePage> createState() => _HomePageState();
 }

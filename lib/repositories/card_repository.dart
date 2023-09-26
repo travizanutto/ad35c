@@ -6,7 +6,7 @@ class CardRepository {
       cardholderName: 'Pessoa X',
       cardNumber: 'xxxx-xxxx-xxxx-xxxx',
       cvc: '00',
-      expDate: DateTime.now(),
+      expDate: '',
       alias: 'Debito BancoX',
       issuer: Issuer.mastercard,
     ),

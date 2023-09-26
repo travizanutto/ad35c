@@ -8,7 +8,7 @@ class CardModel {
   final String cardNumber;
   final String cvc;
   final Issuer issuer;
-  final DateTime expDate;
+  final String expDate;
   double incoming;
   double expense;
   List<TransactionModel> transactionList;

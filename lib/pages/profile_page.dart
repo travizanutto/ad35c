@@ -6,7 +6,7 @@ import './home_page.dart';
 class ProfilePage extends StatefulWidget {
   final ProfileModel userProfile;
 
-  ProfilePage({required this.userProfile});
+  const ProfilePage({super.key, required this.userProfile});
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -32,7 +32,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Meu Perfil'),
+        title: const Text('Meu Perfil'),
         backgroundColor: const Color(CustomColor.pompAndPower),
       ),
       body: SingleChildScrollView(
@@ -42,22 +42,22 @@ class _ProfilePageState extends State<ProfilePage> {
             // 1. Foto de Perfil
             Container(
               alignment: Alignment.center,
-              padding: EdgeInsets.all(16.0),
-              child: CircleAvatar(
+              padding: const EdgeInsets.all(16.0),
+              child: const CircleAvatar(
                 radius: 60.0,
 
                 // bug
                 //backgroundImage: AssetImage(widget.userProfile.profileImageUrl),
-                backgroundColor: const Color(CustomColor.EASports),
+                backgroundColor: Color(CustomColor.eASports),
               ),
             ),
 
             // 2. Nome do Usuário
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.0),
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Text(
                 widget.userProfile.username,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 24.0,
                   fontWeight: FontWeight.bold,
                 ),
@@ -66,24 +66,24 @@ class _ProfilePageState extends State<ProfilePage> {
 
             // 3. Informações de Contato
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.0),
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Text(
                 'Email: ${widget.userProfile.email}\nTelefone: ${widget.userProfile.phoneNumber}',
-                style: TextStyle(fontSize: 16.0),
+                style: const TextStyle(fontSize: 16.0),
               ),
             ),
 
             // 4. Biografia ou Descrição
             Padding(
-              padding: EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(16.0),
               child: Text(
                 widget.userProfile.bio,
-                style: TextStyle(fontSize: 16.0),
+                style: const TextStyle(fontSize: 16.0),
               ),
             ),
 
             // 5. Estatísticas
-            Padding(
+            const Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -95,7 +95,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
             // 6. Ações Editáveis (Editar Perfil)
             Padding(
-              padding: EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(16.0),
               child: ElevatedButton(
                 onPressed: () async {
                   // Navegue para a tela de edição de perfil e aguarde os novos dados
@@ -114,11 +114,11 @@ class _ProfilePageState extends State<ProfilePage> {
                 },
                 // Cor do botão
                 style: ElevatedButton.styleFrom(
-                  primary:
-                      Color(CustomColor.pompAndPower), // Cor do fundo do botão
-                  onPrimary: Colors.white, // Cor do texto do botão
+                  backgroundColor:
+                      const Color(CustomColor.pompAndPower), // Cor do fundo do botão
+                  foregroundColor: Colors.white, // Cor do texto do botão
                 ),
-                child: Text('Editar Perfil'),
+                child: const Text('Editar Perfil'),
               ),
             )
 
