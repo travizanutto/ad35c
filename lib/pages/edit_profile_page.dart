@@ -1,4 +1,3 @@
-import 'package:credit_card_validator/regexs.dart';
 import 'package:flutter/material.dart';
 import 'package:vwalltet/models/profile_model.dart';
 import 'package:vwalltet/pages/home_page.dart';

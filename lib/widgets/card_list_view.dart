@@ -29,7 +29,7 @@ class CardListView extends StatelessWidget {
               icon: const Icon(Icons.edit),
               splashRadius: 20,
               onPressed: () => Get.to(
-                () => CardManagePage(
+                () => CardEditPage(
                   cardIndex: index,
                 ),
               ),
