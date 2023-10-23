@@ -1,6 +1,16 @@
-- beautify main page, remove arrow icon
-- photo in appbar should be tied to profile picture
-- add transaction to card
-- think how to make this relationship, each transaction must be unique but tied to a car (maybe just simple list<model> will work)
-- card edit page/see transactions add graphs and card details (maybe slide between graph and card image (maybe use lib))
-- CRITICAL fix project structure, everything is a mess, profile in home page, lack of controllers
+- fazer botao de editar cartao (lapis ou 3 pontinhos)
+- fazer database {
+    - profile {
+        - tela de login
+        - login/cadastro
+    }
+    - card 
+    - transactions
+}
+- arrumar profile mvc
+- arrumar formularios {
+    - profile
+    - card
+    - transactions
+}
+- arrumar editar cartao some as transacoes
