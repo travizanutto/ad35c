@@ -24,7 +24,9 @@ class CardListView extends StatelessWidget {
               height: 40,
               child: Icon(Icons.credit_card),
             ),
-            title: Text(controller.cardList[index].alias),
+            title: Text(
+              controller.cardList.length.toString(),
+            ),
             trailing: IconButton(
               icon: const Icon(Icons.edit),
               splashRadius: 20,

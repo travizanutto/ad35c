@@ -41,6 +41,7 @@ dependencies:
   flutter_credit_card:
   credit_card_validator:
   firebase_core: ^2.19.0
+  firebase_database:
 
 dev_dependencies:
   flutter_test:
