@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vwalltet/controllers/card_controller.dart';
-import 'package:vwalltet/pages/home_page.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:vwalltet/pages/login_page.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
@@ -16,7 +16,7 @@ Future<void> main() async {
   runApp(
     const GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      home: LoginPage(),
     ),
   );
 }
