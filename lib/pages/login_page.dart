@@ -13,7 +13,7 @@ class LoginPage extends StatelessWidget {
           icon: const Icon(Icons.check),
           onPressed: () {
             Get.off(
-              () => HomePage(), 
+              () => const HomePage(), 
             );
           },
         ),

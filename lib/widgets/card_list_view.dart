@@ -25,7 +25,7 @@ class CardListView extends StatelessWidget {
               child: Icon(Icons.credit_card),
             ),
             title: Text(
-              controller.cardList.length.toString(),
+              controller.cardList[index].alias,
             ),
             trailing: IconButton(
               icon: const Icon(Icons.edit),
