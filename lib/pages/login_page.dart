@@ -9,14 +9,10 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: IconButton(
-          icon: const Icon(Icons.check),
-          onPressed: () {
-            Get.off(
-              () => const HomePage(), 
-            );
-          },
-        ),
+        title: const Text("Login"),
+        centerTitle: false,
+        backgroundColor: const Color(CustomColor.delftBlue),
+        elevation: 2,
       ),
     );
   }

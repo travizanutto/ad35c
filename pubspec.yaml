@@ -38,8 +38,7 @@ dependencies:
   flutter_svg: ^2.0.7
   intl:
   get:
-  flutter_credit_card:
-  credit_card_validator:
+  get_storage:
   firebase_core: ^2.19.0
   firebase_database:
 
