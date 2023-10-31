@@ -1,5 +1,4 @@
 import 'package:vwalltet/models/card_model.dart';
-import 'package:vwalltet/models/transaction_model.dart';
 import 'package:vwalltet/repositories/card_repository.dart';
 import 'package:get/get.dart';
 
@@ -23,10 +22,5 @@ class CardController extends GetxController {
   */
   // devera fazer requisao ao banco posteriomente(*talvez*)
   initCardList() {
-    cardList = repository.list;
-    cardList[0].transactionList.add(TransactionModel(
-        name: 'Teste', description: 'Valor negativo', price: -15, date: 'date'));
-    cardList[0].transactionList.add(TransactionModel(
-        name: 'Teste 2', description: 'Valor positivo', price: 15, date: 'date'));
   }
 }

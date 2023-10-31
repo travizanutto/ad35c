@@ -11,13 +11,13 @@ class AuthController extends GetxController {
   var isLoading = false.obs;
   var title = 'Login'.obs;
   var toggleButtonTitle = 'Registrar'.obs;
-  var buttonTitle = 'Entrar'.obs;
+  var buttonTitle = 'ENTRAR'.obs;
 
   login() async {
     isLoading.value = true;
     try {
       await AuthService.to.login(email.text, password.text);
-      Get.off(HomePage());
+      Get.off(() => HomePage());
       isLoading.value = false;
     } catch (e) {
       isLoading.value = false;
@@ -29,7 +29,7 @@ class AuthController extends GetxController {
     isLoading.value = true;
     try {
       await AuthService.to.newUser(email.text, password.text);
-      Get.off(HomePage());
+      Get.off(() => HomePage());
       isLoading.value = false;
     } catch (e) {
       isLoading.value = false;
@@ -41,6 +41,6 @@ class AuthController extends GetxController {
     isLogin.value = !isLogin.value;
     title.value = isLogin.value ? 'Login' : 'Cadastro';
     toggleButtonTitle.value = isLogin.value ? 'Registrar' : 'Entrar';
-    buttonTitle.value = isLogin.value ? 'Entrar' : 'Cadastrar';
+    buttonTitle.value = isLogin.value ? 'ENTRAR' : 'CADASTRAR';
   }
 }

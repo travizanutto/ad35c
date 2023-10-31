@@ -20,10 +20,14 @@ class LoginPage extends StatelessWidget {
         actions: [
           TextButton(
             onPressed: controller.toggleLoginRegister,
-            style: ButtonStyle(
-              foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+            child: Obx(
+              () => Text(
+                controller.toggleButtonTitle.value,
+                style: TextStyle(
+                    fontFamily: 'Metrophobic',
+                    color: Colors.white),
+              ),
             ),
-            child: Obx(() => Text(controller.toggleButtonTitle.value)),
           )
         ],
       ),
@@ -75,7 +79,7 @@ class LoginPage extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(
                           vertical: 12, horizontal: 16),
-                      child: TextButton(
+                      child: FloatingActionButton.extended(
                         onPressed: () async {
                           if (controller.formKey.currentState!.validate()) {
                             if (controller.isLogin.value) {
@@ -93,7 +97,8 @@ class LoginPage extends StatelessWidget {
                             }
                           }
                         },
-                        child: Text(controller.buttonTitle.value),
+                        backgroundColor: const Color(CustomColor.delftBlue),
+                        label: Text(controller.buttonTitle.value),
                       ),
                     )
                   ],

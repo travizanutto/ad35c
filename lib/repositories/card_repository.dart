@@ -1,16 +1,8 @@
 import 'package:vwalltet/models/card_model.dart';
+import 'package:vwalltet/services/db_service.dart';
 
 class CardRepository {
-  final List<CardModel> _list = [
-    CardModel(
-      cardholderName: 'Pessoa X',
-      cardNumber: 'XXXX XXXX XXXX XXXX',
-      cvc: '000',
-      expDate: '00/00',
-      alias: 'Debito BancoX',
-      issuer: Issuer.mastercard,
-    ),
-  ];
-  List<CardModel> get list => _list;
-  
+  addCard(CardModel card, String uuid) async {
+    await DataBaseService.get().collection('cards').doc(uuid).set(card.toMap());
+  }
 }

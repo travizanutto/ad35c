@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:vwalltet/controllers/auth_controller.dart';
+import 'package:vwalltet/controllers/card_controller.dart';
 import 'package:vwalltet/controllers/profile_controller.dart';
 import 'package:vwalltet/pages/card_form_page.dart';
-import 'package:vwalltet/services/db_service.dart';
 import 'package:vwalltet/widgets/card_list_view.dart';
 import 'package:vwalltet/widgets/home_page_widgets.dart';
 
@@ -18,6 +17,7 @@ class CustomColor {
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    Get.put(CardController());
     Get.put(ProfileController());
     return Scaffold(
       appBar: homePageAppBar(context),

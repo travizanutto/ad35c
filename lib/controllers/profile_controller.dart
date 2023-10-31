@@ -9,7 +9,7 @@ class ProfileController extends GetxController {
   @override
   onInit() {
     super.onInit();
-    var user = AuthService().user;
+    var user = AuthService.user;
     _instance._user = ProfileModel(id: user!.uid, email: user.email!).obs;
   }
 

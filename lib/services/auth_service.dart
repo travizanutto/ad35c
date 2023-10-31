@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
-class AuthService extends GetxController {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+class AuthService {
+  static final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  User? get user => _auth.currentUser;
+  static User? get user => _auth.currentUser;
   static AuthService get to => Get.find();
 
   showSnack(String titulo, String erro) {

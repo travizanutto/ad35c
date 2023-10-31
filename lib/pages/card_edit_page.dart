@@ -142,7 +142,6 @@ class CardEditPage extends CardFormPage {
                   alias: alias.text,
                   cardNumber: cardNumber.text,
                   cvc: cvc.text,
-                  issuer: card.issuer,
                   expDate: expDate.text,
     
                 );

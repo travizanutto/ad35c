@@ -132,7 +132,6 @@ class CardFormPage extends StatelessWidget {
                 cvc: cvc.text,
                 expDate: expDate.text,
                 alias: alias.text,
-                issuer: Issuer.mastercard,
               ),
             );
             controller.cardList.refresh();
