@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:vwalltet/controllers/profile_controller.dart';
+import '../controllers/profile_controller.dart';
 import '../models/profile_model.dart';
 import '../pages/edit_profile_page.dart';
 import './home_page.dart';
 
 class ProfilePage extends StatefulWidget {
-  final ProfileModel userProfile;
+  final ProfileController = Get.find<ProfileController>();
+  ProfileModel userProfile = profileController.userProfile.value;
 
   const ProfilePage({super.key, required this.userProfile});
 
@@ -21,13 +24,6 @@ class _ProfilePageState extends State<ProfilePage> {
   void initState() {
     super.initState();
     userProfile = widget.userProfile; // Inicialize userProfile no initState
-  }
-
-  // Função para atualizar userProfile quando retornar da página de edição de perfil
-  void updateProfile(ProfileModel updatedProfile) {
-    setState(() {
-      userProfile = updatedProfile;
-    });
   }
 
   @override
@@ -105,7 +101,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
                   // Verifique se há dados atualizados e atualize a interface do usuário
                   if (updatedProfile != null) {
-                    updateProfile(updatedProfile);
+                    profileController.updatedProfile(updatedProfile);
                   }
                 },
                 // Cor do botão
