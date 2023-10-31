@@ -23,6 +23,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   void initState() {
+    Get.put(ProfileController());
     build(context);
     super.initState();
     Get.put(ProfileController());

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:vwalltet/controllers/profile_controller.dart';
 import 'package:vwalltet/pages/home_page.dart';
@@ -32,12 +31,12 @@ AppBar homePageAppBar(BuildContext context) {
           Get.to(() => ProfilePage());
         },
         child: Container(
-          margin: const EdgeInsets.all(10),
-          width: 30,
-          height: 30,
-          child: user.image,
+            margin: const EdgeInsets.all(10),
+            width: 30,
+            height: 30,
+            child: user.image,
+          ),
         ),
-      ),
     ],
     elevation: 0,
   );
