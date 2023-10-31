@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:vwalltet/controllers/card_controller.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:vwalltet/controllers/profile_controller.dart';
 import 'package:vwalltet/pages/login_page.dart';
 import 'package:vwalltet/services/auth_service.dart';
 import 'firebase_options.dart';
@@ -16,6 +17,7 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
+  Get.put(ProfileController());
   Get.put(CardController());
   Get.put(AuthService());
   runApp(

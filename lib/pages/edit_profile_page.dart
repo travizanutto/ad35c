@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:vwalltet/controllers/profile_controller.dart';
 import 'package:vwalltet/models/profile_model.dart';
 import 'package:vwalltet/pages/home_page.dart';
 
@@ -12,12 +15,13 @@ class EditProfilePage extends StatefulWidget {
 }
 
 class _EditProfilePageState extends State<EditProfilePage> {
-  final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey =
-      GlobalKey<ScaffoldMessengerState>();
+  final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController phoneNumberController = TextEditingController();
   final TextEditingController bioController = TextEditingController();
+
+  final ProfileController profileController = Get.find();
 
   @override
   void initState() {
@@ -99,7 +103,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
               ),
             ),
               ElevatedButton(
-                onPressed: () async {
+                onPressed: () {
                   String newUsername = usernameController.text;
                   String newEmail = emailController.text;
                   String newPhoneNumber = phoneNumberController.text;
@@ -126,25 +130,18 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     return;
                   }
 
-                  ProfileModel updatedProfile = ProfileModel(
+                  // Atualiza o perfil utilizando o controlador
+                  profileController.updateProfile(ProfileModel(
                     id: widget.userProfile.id,
                     username: newUsername,
                     email: newEmail,
                     phoneNumber: newPhoneNumber,
                     bio: newBio,
                     profileImageUrl: widget.userProfile.profileImageUrl,
-                  );
-
-                  // Atualiza o perfil
-                  setState(() {
-                    widget.userProfile.username = newUsername;
-                    widget.userProfile.email = newEmail;
-                    widget.userProfile.phoneNumber = newPhoneNumber;
-                    widget.userProfile.bio = newBio;
-                  });
+                  ));
 
                   // Retorna os novos dados do perfil para a página anterior
-                  Navigator.pop(context, updatedProfile);
+                  Get.back(result: profileController.userProfile.value);
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(CustomColor.delftBlue),
