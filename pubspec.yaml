@@ -39,8 +39,9 @@ dependencies:
   intl:
   get:
   get_storage:
-  firebase_core: ^2.19.0
+  firebase_core: 
   firebase_database:
+  firebase_auth:
 
 dev_dependencies:
   flutter_test:
