@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:vwalltet/controllers/profile_controller.dart';
 import 'package:vwalltet/pages/home_page.dart';
 import 'package:vwalltet/pages/profile_page.dart';
 
@@ -20,6 +21,7 @@ Row appBarTitle() {
 }
 
 AppBar homePageAppBar(BuildContext context) {
+  final user = ProfileController.user;
   return AppBar(
     title: appBarTitle(),
     centerTitle: false,
@@ -33,7 +35,7 @@ AppBar homePageAppBar(BuildContext context) {
           margin: const EdgeInsets.all(10),
           width: 30,
           height: 30,
-          child: SvgPicture.asset('assets/icons/man_pp.svg'),
+          child: user.image,
         ),
       ),
     ],

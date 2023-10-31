@@ -37,13 +37,23 @@ class ProfilePage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Center(
-            child: Text(
-              user.email,
-              style: TextStyle(fontSize: 18),
+          Padding(
+            padding: EdgeInsets.only(top: 40.0),
+            child: Container(
+              width: 100,
+              height: 100,
+              child: user.image),
+          ),
+          Padding(
+            padding: EdgeInsets.only(top: 40.0),
+            child: Center(
+              child: Text(
+                user.email,
+                style: TextStyle(fontSize: 18),
+                textAlign: TextAlign.center,
+              ),
             ),
           ),
-          
         ],
       ),
     );
