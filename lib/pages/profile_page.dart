@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import '../models/profile_model.dart';
 import '../pages/edit_profile_page.dart';
 import './home_page.dart';
@@ -99,13 +101,7 @@ class _ProfilePageState extends State<ProfilePage> {
               child: ElevatedButton(
                 onPressed: () async {
                   // Navegue para a tela de edição de perfil e aguarde os novos dados
-                  ProfileModel? updatedProfile = await Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          EditProfilePage(userProfile: userProfile),
-                    ),
-                  );
+                  ProfileModel? updatedProfile = await Get.to(() => EditProfilePage(userProfile: userProfile,));
 
                   // Verifique se há dados atualizados e atualize a interface do usuário
                   if (updatedProfile != null) {
