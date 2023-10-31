@@ -20,29 +20,21 @@ class CardListView extends StatelessWidget {
         itemBuilder: (BuildContext context, int index) {
           return ListTile(
             leading: const SizedBox(
-                width: 40, height: 40, child: Icon(Icons.credit_card)),
-            //child: SvgPicture.asset('assets/icons/mastercard_logo.svg')),
-            title: Text(controller.cardList[index].alias),
-            trailing: const SizedBox(
-              width: 150,
-              height:
-                  20, /*
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Text(
-                    //↓
-                    '↓${currencyFormat.format(controller.cardList[index].incoming)}',
-                    style: const TextStyle(color: Colors.green),
-                  ),
-                  const Text(' | '),
-                  Text(
-                    //
-                    '↑${currencyFormat.format(controller.cardList[index].expense)}',
-                    style: const TextStyle(color: Colors.red),
-                  ),
-                ],
-              ),*/
+              width: 40,
+              height: 40,
+              child: Icon(Icons.credit_card),
+            ),
+            title: Text(
+              controller.cardList[index].alias,
+            ),
+            trailing: IconButton(
+              icon: const Icon(Icons.edit),
+              splashRadius: 20,
+              onPressed: () => Get.to(
+                () => CardEditPage(
+                  cardIndex: index,
+                ),
+              ),
             ),
             onTap: () => Get.to(
               () => CardManagePage(

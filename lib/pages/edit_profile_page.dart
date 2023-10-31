@@ -1,4 +1,3 @@
-import 'package:credit_card_validator/regexs.dart';
 import 'package:flutter/material.dart';
 import 'package:vwalltet/models/profile_model.dart';
 import 'package:vwalltet/pages/home_page.dart';
@@ -188,8 +187,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
   }
 
 bool isUsernameSizeValid(String username) {
-    if (username.length < 3) return false;
-    else return true;
+    if (username.length < 3) {
+      return false;
+    } else {
+      return true;
+    }
   }
 
   bool countNonNumericCharacters(String value) {
@@ -197,8 +199,11 @@ bool isUsernameSizeValid(String username) {
     for (int i = 0; i < value.length; i++) {
       if (!isNumeric(value[i])) nonNumericCount++;
     }
-    if (nonNumericCount < 3) return false;
-    else return true;
+    if (nonNumericCount < 3) {
+      return false;
+    } else {
+      return true;
+    }
   }
 
   bool isEmailValid(String email) {

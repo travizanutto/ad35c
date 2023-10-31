@@ -142,6 +142,7 @@ class CardEditPage extends CardFormPage {
                   cvc: cvc.text,
                   issuer: card.issuer,
                   expDate: expDate.text,
+                  
                 );
                 controller.cardList.refresh();
                 Get.back();
