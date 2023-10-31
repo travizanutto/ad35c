@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:vwalltet/controllers/auth_controller.dart';
 import 'package:vwalltet/controllers/profile_controller.dart';
 import 'package:vwalltet/pages/card_form_page.dart';
+import 'package:vwalltet/services/db_service.dart';
 import 'package:vwalltet/widgets/card_list_view.dart';
 import 'package:vwalltet/widgets/home_page_widgets.dart';
 
@@ -13,24 +15,10 @@ class CustomColor {
   static const eASports = 0xffeaeaea;
 }
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
-
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  @override
-  void initState() {
-    Get.put(ProfileController());
-    build(context);
-    super.initState();
-    Get.put(ProfileController());
-  }
-
+class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    Get.put(ProfileController());
     return Scaffold(
       appBar: homePageAppBar(context),
       body: CardListView(),

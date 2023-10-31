@@ -17,7 +17,7 @@ class AuthController extends GetxController {
     isLoading.value = true;
     try {
       await AuthService.to.login(email.text, password.text);
-      Get.off(const HomePage());
+      Get.off(HomePage());
       isLoading.value = false;
     } catch (e) {
       isLoading.value = false;
@@ -29,7 +29,7 @@ class AuthController extends GetxController {
     isLoading.value = true;
     try {
       await AuthService.to.newUser(email.text, password.text);
-      Get.off(const HomePage());
+      Get.off(HomePage());
       isLoading.value = false;
     } catch (e) {
       isLoading.value = false;
