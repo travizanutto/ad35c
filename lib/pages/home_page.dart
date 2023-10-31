@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vwalltet/pages/card_form_page.dart';
+import 'package:vwalltet/services/auth_service.dart';
 import 'package:vwalltet/widgets/card_list_view.dart';
 import 'package:vwalltet/widgets/home_page_widgets.dart';
 import '../models/profile_model.dart';
@@ -38,17 +41,15 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    String? email = AuthService.to.user!.email;
+    log("$email");
     return Scaffold(
       appBar: homePageAppBar(context),
       body: CardListView(),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           Get.to(() => CardFormPage(), fullscreenDialog: true);
-        },/*
-        label: const Text(
-          'ADICIONAR',
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),*/
+        },
         label: const Icon(Icons.add_card),
         backgroundColor: const Color(CustomColor.delftBlue),
       ),

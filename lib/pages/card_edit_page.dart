@@ -4,6 +4,7 @@ import 'package:vwalltet/controllers/card_controller.dart';
 import 'package:vwalltet/models/card_model.dart';
 import 'package:vwalltet/pages/card_form_page.dart';
 import 'package:vwalltet/pages/home_page.dart';
+import 'package:vwalltet/models/transaction_model.dart';
 
 import '../widgets/std_form.dart';
 
@@ -135,6 +136,7 @@ class CardEditPage extends CardFormPage {
             onPressed: () {
               if (formKey.currentState!.validate()) {
                 final controller = Get.put(CardController());
+                List<TransactionModel> transactionList = controller.cardList[cardIndex].transactionList;
                 controller.cardList[cardIndex] = CardModel(
                   cardholderName: cardholderName.text,
                   alias: alias.text,
@@ -142,8 +144,9 @@ class CardEditPage extends CardFormPage {
                   cvc: cvc.text,
                   issuer: card.issuer,
                   expDate: expDate.text,
-                  
+    
                 );
+                controller.cardList[cardIndex].transactionList = transactionList;
                 controller.cardList.refresh();
                 Get.back();
               }

@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 
 class AuthService extends GetxController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  var isLoading = false.obs;
 
   User? get user => _auth.currentUser;
   static AuthService get to => Get.find();
@@ -17,27 +16,25 @@ class AuthService extends GetxController {
   }
 
   newUser(String email, String password) async {
-    isLoading.value = true;
     try {
       await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
     } catch (e) {
       showSnack('Erro ao criar usuário.', '$e');
+      rethrow;
     }
-    isLoading.value = false;
   }
 
   login(String email, String password) async {
-    isLoading.value = true;
     try {
       await _auth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
-    } catch (e) {
-      showSnack('Erro ao logar.', '$e');
+    } on FirebaseAuthException catch (e) {
+      showSnack('Erro ao logar.', e.message!);
+      rethrow;
     }
-    isLoading.value = false;
   }
 
   signOut() async {
