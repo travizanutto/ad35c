@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:vwalltet/pages/home_page.dart';
 import 'package:vwalltet/services/auth_service.dart';
 
 class AuthController extends GetxController {
@@ -16,22 +17,24 @@ class AuthController extends GetxController {
     isLoading.value = true;
     try {
       await AuthService.to.login(email.text, password.text);
+      Get.off(const HomePage());
+      isLoading.value = false;
     } catch (e) {
       isLoading.value = false;
       rethrow;
     }
-    isLoading.value = false;
   }
 
   signUp() async {
     isLoading.value = true;
     try {
       await AuthService.to.newUser(email.text, password.text);
+      Get.off(const HomePage());
+      isLoading.value = false;
     } catch (e) {
       isLoading.value = false;
       rethrow;
     }
-    isLoading.value = false;
   }
 
   toggleLoginRegister() {

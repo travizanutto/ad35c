@@ -26,7 +26,9 @@ class CardManagePage extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.miniEndFloat,
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => Get.to(
-          TransactionFormPage(cardIndex: cardIndex,),
+          () => TransactionFormPage(
+            cardIndex: cardIndex,
+          ),
         ),
         backgroundColor: const Color(CustomColor.delftBlue),
         label: const Icon(Icons.add),

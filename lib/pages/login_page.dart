@@ -57,6 +57,7 @@ class LoginPage extends StatelessWidget {
                           vertical: 12, horizontal: 16),
                       child: TextFormField(
                         controller: controller.password,
+                        obscureText: true,
                         decoration: const InputDecoration(
                           border: OutlineInputBorder(),
                           labelText: 'Senha',
@@ -80,14 +81,12 @@ class LoginPage extends StatelessWidget {
                             if (controller.isLogin.value) {
                               try {
                                 await controller.login();
-                                Get.off(const HomePage());
                               } catch (e) {
                                 return;
                               }
                             } else {
                               try {
                                 await controller.signUp();
-                                Get.off(const HomePage());
                               } catch (e) {
                                 return;
                               }

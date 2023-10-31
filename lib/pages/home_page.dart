@@ -2,11 +2,11 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:vwalltet/controllers/profile_controller.dart';
 import 'package:vwalltet/pages/card_form_page.dart';
 import 'package:vwalltet/services/auth_service.dart';
 import 'package:vwalltet/widgets/card_list_view.dart';
 import 'package:vwalltet/widgets/home_page_widgets.dart';
-import '../models/profile_model.dart';
 
 class CustomColor {
   static const gunmetal = 0xff183642;
@@ -15,15 +15,6 @@ class CustomColor {
   static const periwinkle = 0xffcbc5ea;
   static const eASports = 0xffeaeaea;
 }
-
-ProfileModel userProfile = ProfileModel(
-  id: 'userId',
-  username: 'NomeDeUsuario',
-  email: 'usuario@example.com',
-  phoneNumber: '123912345678',
-  bio: 'Descrição do usuário',
-  profileImageUrl: 'assets/profile_image.jpg',
-);
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -37,12 +28,11 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     build(context);
     super.initState();
+    Get.put(ProfileController());
   }
 
   @override
   Widget build(BuildContext context) {
-    String? email = AuthService.to.user!.email;
-    log("$email");
     return Scaffold(
       appBar: homePageAppBar(context),
       body: CardListView(),

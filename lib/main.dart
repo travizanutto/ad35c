@@ -17,7 +17,6 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  Get.put(ProfileController());
   Get.put(CardController());
   Get.put(AuthService());
   runApp(

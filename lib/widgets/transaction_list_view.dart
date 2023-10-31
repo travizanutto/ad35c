@@ -35,7 +35,7 @@ class TransactionListView extends StatelessWidget {
                     : const TextStyle(color: Colors.green),
               ),
               onTap: () => Get.to(
-                    TransactionEditPage(
+                    () => TransactionEditPage(
                         cardIndex: cardIndex, transactionIndex: index),
                   ));
         },

@@ -7,12 +7,14 @@ import 'package:vwalltet/pages/profile_page.dart';
 Row appBarTitle() {
   return const Row(
     children: [
-      Text('Seus cartões',
-          style: TextStyle(
-            fontFamily: 'Metrophobic',
-            fontSize: 24,
-            color: Color.fromARGB(255, 255, 255, 255),
-          )),
+      Text(
+        'Seus cartões',
+        style: TextStyle(
+          fontFamily: 'Metrophobic',
+          fontSize: 24,
+          color: Color.fromARGB(255, 255, 255, 255),
+        ),
+      ),
     ],
   );
 }
@@ -25,7 +27,7 @@ AppBar homePageAppBar(BuildContext context) {
     actions: [
       GestureDetector(
         onTap: () {
-          Get.to(() => ProfilePage(userProfile: userProfile));
+          Get.to(() => ProfilePage());
         },
         child: Container(
           margin: const EdgeInsets.all(10),
