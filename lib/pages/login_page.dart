@@ -1,10 +1,7 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vwalltet/controllers/auth_controller.dart';
 import 'package:vwalltet/pages/home_page.dart';
-import 'package:vwalltet/services/auth_service.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
