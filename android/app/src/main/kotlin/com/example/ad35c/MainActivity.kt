@@ -1,4 +1,4 @@
-package utfpr.ad35c.vwallet.ad35c
+package com.example.ad35c
 
 import io.flutter.embedding.android.FlutterActivity
 

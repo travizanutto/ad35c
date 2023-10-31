@@ -40,8 +40,8 @@ dependencies:
   get:
   get_storage:
   firebase_core: 
-  firebase_database:
   firebase_auth:
+  cloud_firestore:
 
 dev_dependencies:
   flutter_test:

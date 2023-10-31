@@ -35,6 +35,7 @@ flutter_*.png
 linked_*.ds
 unlinked.ds
 unlinked_spec.ds
+*.lock
 
 # Android related
 **/android/**/gradle-wrapper.jar
@@ -108,3 +109,5 @@ app.*.symbols
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 !/dev/ci/**/Gemfile.lock
 !.vscode/settings.json
+
+.metadata
