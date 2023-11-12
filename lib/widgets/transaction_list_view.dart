@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:vwalltet/controllers/card_controller.dart';
 import 'package:vwalltet/models/card_model.dart';
 import 'package:vwalltet/pages/home_page.dart';
 import 'package:vwalltet/pages/transaction_edit_page.dart';
+import 'package:vwalltet/repositories/card_repository.dart';
 
 class TransactionListView extends StatelessWidget {
   final currencyFormat = NumberFormat.currency(locale: 'pt_BR', name: 'R\$');
@@ -14,11 +14,11 @@ class TransactionListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(CardController());
+    final repository = Get.put(CardRepository());
     return Obx(() {
       return ListView.separated(
         itemBuilder: (BuildContext context, int index) {
-          final CardModel card = controller.cardList[cardIndex];
+          final CardModel card = repository.cardList[cardIndex];
           final transaction = card.transactionList[index];
           return ListTile(
               leading: const SizedBox(
@@ -45,7 +45,7 @@ class TransactionListView extends StatelessWidget {
           thickness: 1,
           color: Color(CustomColor.delftBlue),
         ),
-        itemCount: controller.cardList[cardIndex].transactionList.length,
+        itemCount: repository.cardList[cardIndex].transactionList.length,
       );
     });
   }

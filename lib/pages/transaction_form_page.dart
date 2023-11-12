@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:vwalltet/controllers/card_controller.dart';
 import 'package:vwalltet/models/transaction_model.dart';
 import 'package:vwalltet/pages/home_page.dart';
+import 'package:vwalltet/repositories/card_repository.dart';
 import 'package:vwalltet/widgets/std_form.dart';
 
 class TransactionFormPage extends StatelessWidget {
@@ -98,14 +98,14 @@ class TransactionFormPage extends StatelessWidget {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           if (formKey.currentState!.validate()) {
-            final controller = Get.put(CardController());
+            final repository = Get.put(CardRepository());
             final transaction = TransactionModel(
                 name: name.text,
                 description: description.text,
                 price: double.parse(price.text),
                 date: date.text);
-            controller.cardList[cardIndex].transactionList.add(transaction);
-            controller.cardList.refresh();
+            repository.cardList[cardIndex].transactionList.add(transaction);
+            repository.cardList.refresh();
             Get.back();
           }
         },

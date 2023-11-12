@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:vwalltet/controllers/card_controller.dart';
 import 'package:vwalltet/models/card_model.dart';
 import 'package:vwalltet/pages/card_form_page.dart';
 import 'package:vwalltet/pages/home_page.dart';
 import 'package:vwalltet/models/transaction_model.dart';
+import 'package:vwalltet/repositories/card_repository.dart';
 
 import '../widgets/std_form.dart';
 
 class CardEditPage extends CardFormPage {
   final int cardIndex;
-  final controller = Get.put(CardController());
+  final repository = Get.put(CardRepository());
 
   CardEditPage({super.key, required this.cardIndex});
 
   @override
   Widget build(BuildContext context) {
-    final card = controller.cardList[cardIndex];
+    final card = repository.cardList[cardIndex];
     alias.text = card.alias;
     cardNumber.text = card.cardNumber;
     cardholderName.text = card.cardholderName;
@@ -128,25 +128,25 @@ class CardEditPage extends CardFormPage {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
+        child:
+            Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
           FloatingActionButton.extended(
             heroTag: "btn1",
             onPressed: () {
               if (formKey.currentState!.validate()) {
-                final controller = Get.put(CardController());
-                List<TransactionModel> transactionList = controller.cardList[cardIndex].transactionList;
-                controller.cardList[cardIndex] = CardModel(
+                final repository = Get.put(CardRepository());
+                List<TransactionModel> transactionList =
+                    repository.cardList[cardIndex].transactionList;
+                repository.cardList[cardIndex] = CardModel(
                   cardholderName: cardholderName.text,
                   alias: alias.text,
                   cardNumber: cardNumber.text,
                   cvc: cvc.text,
                   expDate: expDate.text,
-    
                 );
-                controller.cardList[cardIndex].transactionList = transactionList;
-                controller.cardList.refresh();
+                repository.cardList[cardIndex].transactionList =
+                    transactionList;
+                repository.cardList.refresh();
                 Get.back();
               }
             },
@@ -156,14 +156,16 @@ class CardEditPage extends CardFormPage {
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
-          const SizedBox(width: 10,),
+          const SizedBox(
+            width: 10,
+          ),
           FloatingActionButton.extended(
             heroTag: "btn2",
             onPressed: () {
               if (formKey.currentState!.validate()) {
-                final controller = Get.put(CardController());
-                controller.cardList.removeAt(cardIndex);
-                controller.cardList.refresh();
+                final repository = Get.put(CardRepository());
+                repository.cardList.removeAt(cardIndex);
+                repository.cardList.refresh();
                 Get.back();
               }
             },
@@ -173,10 +175,8 @@ class CardEditPage extends CardFormPage {
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
-          ]
+        ]),
       ),
-      ),
-      
     );
   }
 }

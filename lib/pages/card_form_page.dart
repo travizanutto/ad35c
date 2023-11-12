@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:vwalltet/controllers/card_controller.dart';
 import 'package:vwalltet/models/card_model.dart';
 import 'package:vwalltet/pages/home_page.dart';
+import 'package:vwalltet/repositories/card_repository.dart';
 import 'package:vwalltet/widgets/std_form.dart';
 
 class CardFormPage extends StatelessWidget {
@@ -124,8 +124,8 @@ class CardFormPage extends StatelessWidget {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           if (formKey.currentState!.validate()) {
-            final controller = Get.put(CardController());
-            controller.cardList.add(
+            final repository = Get.put(CardRepository());
+            repository.cardList.add(
               CardModel(
                 cardholderName: cardholderName.text,
                 cardNumber: cardNumber.text,
@@ -134,7 +134,7 @@ class CardFormPage extends StatelessWidget {
                 alias: alias.text,
               ),
             );
-            controller.cardList.refresh();
+            repository.cardList.refresh();
             Get.back();
           }
         },

@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:vwalltet/controllers/card_controller.dart';
 import 'package:vwalltet/models/transaction_model.dart';
 import 'package:vwalltet/pages/home_page.dart';
 import 'package:vwalltet/pages/transaction_form_page.dart';
+import 'package:vwalltet/repositories/card_repository.dart';
 import 'package:vwalltet/widgets/std_form.dart';
 
 class TransactionEditPage extends TransactionFormPage {
   TransactionEditPage(
       {super.key, required super.cardIndex, required this.transactionIndex});
   final int transactionIndex;
-  final controller = Get.put(CardController());
+  final repository = Get.put(CardRepository());
 
   @override
   Widget build(BuildContext context) {
     final transaction =
-        controller.cardList[cardIndex].transactionList[transactionIndex];
+        repository.cardList[cardIndex].transactionList[transactionIndex];
     name.text = transaction.name;
     description.text = transaction.description;
     price.text = transaction.price.toString();
@@ -105,15 +105,15 @@ class TransactionEditPage extends TransactionFormPage {
             heroTag: 'btn1',
             onPressed: () {
               if (formKey.currentState!.validate()) {
-                final controller = Get.put(CardController());
+                final repository = Get.put(CardRepository());
                 final transaction = TransactionModel(
                     name: name.text,
                     description: description.text,
                     price: double.parse(price.text),
                     date: date.text);
-                controller.cardList[cardIndex]
+                repository.cardList[cardIndex]
                     .transactionList[transactionIndex] = transaction;
-                controller.cardList.refresh();
+                repository.cardList.refresh();
                 Get.back();
               }
             },
@@ -123,15 +123,17 @@ class TransactionEditPage extends TransactionFormPage {
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
-          const SizedBox(width: 5,),
+          const SizedBox(
+            width: 5,
+          ),
           FloatingActionButton.extended(
             heroTag: 'btn2',
             onPressed: () {
               if (formKey.currentState!.validate()) {
-                final controller = Get.put(CardController());
-                controller.cardList[cardIndex].transactionList
+                final repository = Get.put(CardRepository());
+                repository.cardList[cardIndex].transactionList
                     .removeAt(transactionIndex);
-                controller.cardList.refresh();
+                repository.cardList.refresh();
                 Get.back();
               }
             },

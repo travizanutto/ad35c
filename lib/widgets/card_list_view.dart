@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 //import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:vwalltet/controllers/card_controller.dart';
 import 'package:vwalltet/pages/card_edit_page.dart';
 import 'package:vwalltet/pages/card_manage_page.dart';
 import 'package:vwalltet/pages/home_page.dart';
+import 'package:vwalltet/repositories/card_repository.dart';
 
 class CardListView extends StatelessWidget {
   final currencyFormat = NumberFormat.currency(locale: 'pt_BR', name: 'R\$');
-  final controller = Get.find<CardController>();
+  final repository = Get.find<CardRepository>();
 
   CardListView({super.key});
 
@@ -25,7 +25,7 @@ class CardListView extends StatelessWidget {
               child: Icon(Icons.credit_card),
             ),
             title: Text(
-              controller.cardList[index].alias,
+              repository.cardList[index].alias,
             ),
             trailing: IconButton(
               icon: const Icon(Icons.edit),
@@ -54,7 +54,7 @@ class CardListView extends StatelessWidget {
           thickness: 1,
           color: Color(CustomColor.delftBlue),
         ),
-        itemCount: controller.cardList.length,
+        itemCount: repository.cardList.length,
       ),
     );
   }

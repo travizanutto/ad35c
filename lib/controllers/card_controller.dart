@@ -1,26 +1,22 @@
+import 'package:sqlite3/sqlite3.dart';
 import 'package:vwalltet/models/card_model.dart';
-import 'package:vwalltet/repositories/card_repository.dart';
-import 'package:get/get.dart';
+import 'package:vwalltet/services/auth_service.dart';
 
-class CardController extends GetxController {
-  final CardRepository repository = CardRepository();
+class CardController {
+  late final String uid;
+  late final int cardNumber;
+  late final List<CardModel> cardsIndexList;
+  late final Database db;
+  static final CardController _instance = CardController();
 
-  @override
-  void onInit() {
-    initCardList();
-    super.onInit();
+  CardController() {
+    uid = AuthService.user!.uid;
+    db = sqlite3.open('../main.db');
   }
 
-  final _cardList = <CardModel>[].obs;
-  RxList<CardModel> get cardList => _cardList;
-  set cardList(list) => cardList.value = list;
-  /* incoming e expense sera requisitado e gravado ao banco posteriomente
-  por enquanto hard coded 
-  get cardIncoming => ...;
-  get cardExpense => ...;
-  void addTransaction(...);
-  */
-  // devera fazer requisao ao banco posteriomente(*talvez*)
-  initCardList() {
+  List<CardModel> initCardList() {
+    return [];
   }
+
+  static get instance => _instance;
 }

@@ -1,8 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:sqlite3/sqlite3.dart';
 
-class DataBaseService {
-  static final DataBaseService _instance = DataBaseService();
-  final FirebaseFirestore _fbInstance = FirebaseFirestore.instance;
+class DatabaseService {
+  final Database db = sqlite3.open('./main.db');
 
-  static FirebaseFirestore get() => _instance._fbInstance;
 }
