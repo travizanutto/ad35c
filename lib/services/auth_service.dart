@@ -22,7 +22,6 @@ class AuthService {
     try {
       await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
-      DatabaseService().db.prepare('INSERT INTO ')
     } catch (e) {
       showSnack('Erro ao criar usuário.', '$e');
       rethrow;
