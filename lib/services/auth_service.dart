@@ -1,8 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
-import 'package:sqlite3/sqlite3.dart';
-import 'package:vwalltet/controllers/card_controller.dart';
-import 'package:vwalltet/services/db_service.dart';
 
 class AuthService {
   static final FirebaseAuth _auth = FirebaseAuth.instance;

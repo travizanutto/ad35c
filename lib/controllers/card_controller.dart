@@ -11,7 +11,7 @@ class CardController {
 
   CardController() {
     uid = AuthService.user!.uid;
-    db = sqlite3.open('../main.db');
+    //db = sqlite3.open('../main.db');
   }
 
   List<CardModel> initCardList() {
