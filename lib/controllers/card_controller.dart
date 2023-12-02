@@ -1,5 +1,7 @@
+import 'package:get/get.dart';
 import 'package:sqlite3/sqlite3.dart';
 import 'package:vwalltet/models/card_model.dart';
+import 'package:vwalltet/repositories/card_repository.dart';
 import 'package:vwalltet/services/auth_service.dart';
 
 class CardController {
@@ -11,6 +13,7 @@ class CardController {
 
   CardController() {
     uid = AuthService.user!.uid;
+   
     //db = sqlite3.open('../main.db');
   }
 

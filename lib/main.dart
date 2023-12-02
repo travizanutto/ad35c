@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:vwalltet/controllers/card_controller.dart';
 import 'package:vwalltet/pages/login_page.dart';
 import 'package:vwalltet/repositories/card_repository.dart';
 import 'package:vwalltet/services/auth_service.dart';
@@ -13,8 +14,8 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
+  
   Get.put(AuthService());
-  Get.put(CardRepository());
   runApp(
     GetMaterialApp(
       debugShowCheckedModeBanner: false,
