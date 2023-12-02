@@ -21,7 +21,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.put(CardController());
-     Get.put(CardRepository());
+    Get.put(CardRepository());
     Get.put(ProfileController());
     return Scaffold(
       appBar: homePageAppBar(context),
