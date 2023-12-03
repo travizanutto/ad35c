@@ -1,5 +1,7 @@
+import 'package:dice_icons/dice_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:vwalltet/controllers/card_controller.dart';
 import 'package:vwalltet/models/card_model.dart';
 import 'package:vwalltet/pages/home_page.dart';
 import 'package:vwalltet/repositories/card_repository.dart';
@@ -19,9 +21,23 @@ class CardFormPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color(CustomColor.delftBlue),
-      ),
+      appBar:
+          AppBar(backgroundColor: const Color(CustomColor.delftBlue), actions: [
+        IconButton(
+          icon: Icon(
+            DiceIcons.dice4,
+            color: Colors.white,
+          ),
+          onPressed: () async {
+            final controller = Get.put(CardController());
+            final repository = Get.put(CardRepository());
+            final tmp = await controller.getRandomCard();
+            repository.cardList.add(tmp);
+            repository.cardList.refresh();
+            Get.back();
+          },
+        ),
+      ]),
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.all(16),
