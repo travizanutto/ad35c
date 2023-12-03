@@ -39,10 +39,22 @@ class ProfilePage extends StatelessWidget {
         children: [
           Padding(
             padding: EdgeInsets.only(top: 40.0),
-            child: Container(
-              width: 100,
-              height: 100,
-              child: user.image),
+            child: GestureDetector(
+              onTap: () async {
+                await ProfileController.pickImage();
+              },
+              child: Container(
+                width: 100,
+                height: 100,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: user.image != null ? FileImage(user.image!) : AssetImage('assets/icons/icon.png') as ImageProvider,
+                  ),
+                ),
+              ),
+            ),
           ),
           Padding(
             padding: EdgeInsets.only(top: 40.0),

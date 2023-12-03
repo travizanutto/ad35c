@@ -31,12 +31,18 @@ AppBar homePageAppBar(BuildContext context) {
           Get.to(() => ProfilePage());
         },
         child: Container(
-            margin: const EdgeInsets.all(10),
-            width: 30,
-            height: 30,
-            child: user.image,
+          margin: const EdgeInsets.all(10),
+          width: 30,
+          height: 30,
+          child: GetBuilder<ProfileController>(
+            builder: (_) => CircleAvatar(
+              backgroundImage: user.image != null
+                  ? FileImage(user.image!)
+                  : AssetImage('assets/icons/icon.png') as ImageProvider,
+            ),
           ),
         ),
+      ),
     ],
     elevation: 0,
   );

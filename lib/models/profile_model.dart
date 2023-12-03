@@ -1,10 +1,32 @@
-import 'package:flutter/material.dart';
+import 'dart:io';
+import 'package:get/get_state_manager/src/simple/get_controllers.dart';
+import 'package:image_picker/image_picker.dart';
 
-class ProfileModel {
+class ProfileModel extends GetxController {
   final String id;
   final String email;
   final String? username;
-  Image image = Image.asset('assets/icons/icon.png');
+  File? image;
+  final String defaultImagePath;
 
-  ProfileModel({required this.id, required this.email, this.username});
+  ProfileModel({
+    required this.id,
+    required this.email,
+    this.username,
+    this.image,
+    required this.defaultImagePath,
+  }) {
+    if (image == null || image!.path.isEmpty) {
+      image = File(defaultImagePath);
+    }
+  }
+
+  Future<void> pickImage() async {
+    final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
+
+    if (pickedFile != null) {
+      image = File(pickedFile.path);
+      update();
+    }
+  }
 }
