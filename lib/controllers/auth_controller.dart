@@ -16,7 +16,9 @@ class AuthController extends GetxController {
 
   AuthController() {
     if (kDebugMode) {
-      
+      email.text = 'a@a.com';
+      password.text = '123456';
+      login();
     }
   }
 

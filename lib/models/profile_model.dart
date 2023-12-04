@@ -22,11 +22,12 @@ class ProfileModel extends GetxController {
   }
 
   Future<void> pickImage() async {
-    final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
+    final pickedFile =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
 
     if (pickedFile != null) {
       image = File(pickedFile.path);
-      update();
+      this.refresh();
     }
   }
 }

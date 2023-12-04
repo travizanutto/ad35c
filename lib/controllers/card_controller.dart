@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:get/get.dart';
 import 'package:vwalltet/controllers/profile_controller.dart';
 import 'package:vwalltet/models/card_model.dart';
 import 'package:vwalltet/services/auth_service.dart';

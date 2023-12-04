@@ -13,18 +13,20 @@ class ProfileController extends GetxController {
     super.onInit();
     var user = AuthService.user;
 
-    _instance._user = Rx<ProfileModel>(ProfileModel(
-      id: user!.uid,
-      email: user.email!,
-      image: File(''),
-      defaultImagePath: 'assets/icons/icon.png',
-    ));
+    _instance._user = Rx<ProfileModel>(
+      ProfileModel(
+        id: user!.uid,
+        email: user.email!,
+        image: File(''),
+        defaultImagePath: 'assets/icons/icon.png',
+      ),
+    );
   }
 
   static ProfileModel get user => _instance._user.value;
 
   static Future<void> pickImage() async {
     await _instance._user.value.pickImage();
-    _instance._user.update((profile) {});
+    _instance._user.refresh();
   }
 }
