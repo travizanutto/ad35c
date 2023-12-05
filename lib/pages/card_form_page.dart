@@ -1,24 +1,26 @@
 import 'package:dice_icons/dice_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:vwalltet/controllers/createcard_controller.dart';
 import 'package:vwalltet/controllers/card_controller.dart';
+import 'package:vwalltet/controllers/createcard_controller.dart';
 import 'package:vwalltet/models/card_model.dart';
 import 'package:vwalltet/pages/home_page.dart';
 import 'package:vwalltet/repositories/card_repository.dart';
 import 'package:vwalltet/widgets/std_form.dart';
-// Import the firebase_core and cloud_firestore plugin
-import 'package:firebase_core/firebase_core.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 class CardFormPage extends StatelessWidget {
   CardFormPage({super.key});
 
-  final controller = Get.put(CreateCardController());
+  final cardholderName = TextEditingController();
+  final alias = TextEditingController();
+  final cardNumber = TextEditingController();
+  final cvc = TextEditingController();
+  //final issuer = DropdownMenuItem(child: child)
+  final expDate = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(CreateCardController());
     return Scaffold(
       appBar:
           AppBar(backgroundColor: const Color(CustomColor.delftBlue), actions: [
@@ -27,7 +29,7 @@ class CardFormPage extends StatelessWidget {
             DiceIcons.dice5,
             color: Colors.white,
           ),
-          onPressed: controller.appBarOnPressed(),
+          onPressed: () => controller.appBarOnPressed(),
         ),
       ]),
       body: SingleChildScrollView(
@@ -38,6 +40,7 @@ class CardFormPage extends StatelessWidget {
             child: Column(
               children: [
                 TextFormField(
+                  controller: alias,
                   decoration: stdInputDecoration('Nome de exibição'),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -50,6 +53,7 @@ class CardFormPage extends StatelessWidget {
                   height: 5,
                 ),
                 TextFormField(
+                  controller: cardholderName,
                   decoration: stdInputDecoration('Nome do titular'),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -62,6 +66,7 @@ class CardFormPage extends StatelessWidget {
                   height: 5,
                 ),
                 TextFormField(
+                  controller: cardNumber,
                   decoration: stdInputDecoration('Número do cartão'),
                   keyboardType: TextInputType.number,
                   validator: (value) {
@@ -79,6 +84,7 @@ class CardFormPage extends StatelessWidget {
                     SizedBox(
                       width: context.width / 2 - 16,
                       child: TextFormField(
+                        controller: cvc,
                         decoration: stdInputDecoration('Código CVC'),
                         keyboardType: TextInputType.number,
                         validator: (value) {
@@ -100,6 +106,7 @@ class CardFormPage extends StatelessWidget {
                     SizedBox(
                       width: context.width / 2 - 16,
                       child: TextFormField(
+                        controller: expDate,
                         decoration: stdInputDecoration('Data de vencimento'),
                         keyboardType: TextInputType.number,
                         validator: (value) {
@@ -127,10 +134,19 @@ class CardFormPage extends StatelessWidget {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           if (formKey.currentState!.validate()) {
-            controller.onSavePressed();
+            final repository = Get.put(CardRepository());
+            repository.addCard(
+              CardModel(
+                cardholderName: cardholderName.text,
+                cardNumber: cardNumber.text,
+                cvc: cvc.text,
+                expDate: expDate.text,
+                alias: alias.text,
+              ),
+            );
+            repository.getCards();
             Get.back();
           }
-          
         },
         backgroundColor: const Color(CustomColor.delftBlue),
         label: const Text(

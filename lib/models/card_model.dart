@@ -1,4 +1,5 @@
 import 'package:vwalltet/models/transaction_model.dart';
+import 'dart:convert';
 
 class CardModel {
   final String cardholderName;
@@ -14,7 +15,8 @@ class CardModel {
     required this.cardNumber,
     required this.cvc,
     required this.expDate,
-  }) : transactionList = [];
+    this.transactionList = const [],
+  });
 
   Map<String, dynamic> toMap() {
     return {
@@ -25,4 +27,6 @@ class CardModel {
       "expDate": this.expDate,
     };
   }
+
+
 }

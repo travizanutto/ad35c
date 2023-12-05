@@ -2,10 +2,11 @@ import 'package:get/get.dart';
 
 import 'package:vwalltet/models/card_model.dart';
 import 'package:vwalltet/repositories/card_repository.dart';
+import 'package:vwalltet/controllers/profile_controller.dart';
 import 'package:flutter/material.dart';
+import 'dart:convert';
+
 // Import the firebase_core and cloud_firestore plugin
-import 'package:firebase_core/firebase_core.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:http/http.dart' as http;
 
@@ -18,11 +19,13 @@ class CreateCardController {
   final expDate = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
-  public appBarOnPressed() async {
+  int randomCardNumber = 0;
+
+  appBarOnPressed() async {
     final repository = Get.put(CardRepository());
-    final tmp = await controller.getRandomCard();
-    repository.cardList.add(tmp);
-    repository.cardList.refresh();
+    final tmp = await getRandomCard();
+    repository.addCard(tmp);
+    repository.getCards();
     Get.back();
   }
 
@@ -45,12 +48,15 @@ class CreateCardController {
     var response = await http.get(url);
     final json = jsonDecode(response.body);
     randomCardNumber++;
-
-    return CardModel(
-        cardholderName: ProfileController.user.email,
-        alias: 'Random Card $randomCardNumber',
+    final profileController = Get.put(ProfileController());
+    CardModel tmp = CardModel(
+        cardholderName: profileController.user.email,
+        alias: 'Random Card',
         cardNumber: json["credit_card_number"],
         cvc: json["id"].toString(),
         expDate: json["credit_card_expiry_date"]);
+    print("AAAAAAAAA");
+    print(json);
+    return tmp;
   }
 }
