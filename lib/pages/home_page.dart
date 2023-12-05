@@ -30,7 +30,7 @@ class HomePage extends StatelessWidget {
         onPressed: () {
           Get.to(() => CardFormPage(), fullscreenDialog: true);
         },
-        label: const Icon(Icons.add_card),
+        label: const Icon(Icons.add_card, color: Colors.white,),
         backgroundColor: const Color(CustomColor.delftBlue),
       ),
     );
