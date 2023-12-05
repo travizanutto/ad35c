@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vwalltet/pages/home_page.dart';
@@ -12,6 +13,14 @@ class AuthController extends GetxController {
   var title = 'Login'.obs;
   var toggleButtonTitle = 'Registrar'.obs;
   var buttonTitle = 'ENTRAR'.obs;
+
+  AuthController() {
+    if (kDebugMode) {
+      email.text = 'a@a.com';
+      password.text = '123456';
+      login();
+    }
+  }
 
   login() async {
     isLoading.value = true;
