@@ -112,7 +112,9 @@ class TransactionFormPage extends StatelessWidget {
         backgroundColor: const Color(CustomColor.delftBlue),
         label: const Text(
           'SALVAR',
-          style: TextStyle(fontWeight: FontWeight.bold),
+          style: TextStyle(fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
         ),
       ),
     );

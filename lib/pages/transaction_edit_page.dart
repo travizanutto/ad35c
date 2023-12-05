@@ -120,7 +120,9 @@ class TransactionEditPage extends TransactionFormPage {
             backgroundColor: const Color(CustomColor.delftBlue),
             label: const Text(
               'SALVAR',
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: TextStyle(fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
             ),
           ),
           const SizedBox(
@@ -140,7 +142,9 @@ class TransactionEditPage extends TransactionFormPage {
             backgroundColor: const Color.fromARGB(200, 200, 0, 0),
             label: const Text(
               'EXCLUIR',
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: TextStyle(fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
             ),
           ),
         ],

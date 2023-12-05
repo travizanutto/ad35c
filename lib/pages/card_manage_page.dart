@@ -31,7 +31,9 @@ class CardManagePage extends StatelessWidget {
           ),
         ),
         backgroundColor: const Color(CustomColor.delftBlue),
-        label: const Icon(Icons.add),
+        label: const Icon(Icons.add,
+            color: Colors.white,
+          ),
       ),
     );
   }

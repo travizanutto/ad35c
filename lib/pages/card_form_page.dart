@@ -25,7 +25,7 @@ class CardFormPage extends StatelessWidget {
           AppBar(backgroundColor: const Color(CustomColor.delftBlue), actions: [
         IconButton(
           icon: Icon(
-            DiceIcons.dice4,
+            DiceIcons.dice5,
             color: Colors.white,
           ),
           onPressed: () async {
@@ -157,7 +157,9 @@ class CardFormPage extends StatelessWidget {
         backgroundColor: const Color(CustomColor.delftBlue),
         label: const Text(
           'SALVAR',
-          style: TextStyle(fontWeight: FontWeight.bold),
+          style: TextStyle(fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
         ),
       ),
     );
