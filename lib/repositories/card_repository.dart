@@ -8,7 +8,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class CardRepository {
-  final _cardList = <CardModel>[].obs;
+  var _cardList = <CardModel>[].obs;
   RxList<CardModel> get cardList => _cardList;
   set cardList(list) => cardList.value = list;
   final controller = CardController();
@@ -28,15 +28,30 @@ class CardRepository {
     final profileController = Get.put(ProfileController());
     final uid = profileController.user.id;
     final cards = await db.collection("cards").get();
+    _cardList = <CardModel>[].obs;
     cards.docs.forEach((element) {
+      final transactionList = <TransactionModel>[];
+      element.reference.collection("transactions").get().then((value) {
+          value.docs.forEach((element) {
+            transactionList.add(TransactionModel(
+              name: element["name"],
+              description: element["description"],
+              price: element["price"],
+              date: element["date"],
+              cardAlias: element["cardAlias"],
+            ));
+          });
+        }).then((value) => value);
       final card = CardModel(
         cardholderName: element["cardholderName"],
         alias: element["alias"],
         cardNumber: element["cardNumber"],
         cvc: element["cvc"],
         expDate: element["expDate"],
-        transactionList:[]
+        // Get the colection transaction in colection cards
+        transactionList: transactionList,
       );
+      // Erase cardList
       _cardList.add(card);
     });
   }
@@ -59,6 +74,6 @@ class CardRepository {
   Future<void> addTransaction(TransactionModel transaction) async {
     final profileController = Get.put(ProfileController());
     final uid = profileController.user.id;
-    await db.collection("cards").doc(transaction.cardAlias).collection("transactions").doc().set(transaction.toMap());
+    await db.collection("cards").doc(transaction.cardAlias).collection("transactions").add(transaction.toMap());
   }
 }

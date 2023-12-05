@@ -110,7 +110,8 @@ class TransactionEditPage extends TransactionFormPage {
                     name: name.text,
                     description: description.text,
                     price: double.parse(price.text),
-                    date: date.text);
+                    date: date.text,
+                    cardAlias: repository.cardList[cardIndex].alias);
                 repository.cardList[cardIndex]
                     .transactionList[transactionIndex] = transaction;
                 repository.cardList.refresh();

@@ -103,9 +103,10 @@ class TransactionFormPage extends StatelessWidget {
                 name: name.text,
                 description: description.text,
                 price: double.parse(price.text),
-                date: date.text);
-            repository.cardList[cardIndex].transactionList.add(transaction);
-            repository.cardList.refresh();
+                date: date.text,
+                cardAlias: repository.cardList[cardIndex].alias);
+            repository.addTransaction(transaction);
+            repository.getCards();
             Get.back();
           }
         },

@@ -18,6 +18,7 @@ class TransactionModel {
       "description": this.description,
       "price": this.price,
       "date": this.date,
+      "cardAlias": this.cardAlias,
     };
   }
 }

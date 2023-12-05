@@ -21,8 +21,10 @@ class CreateCardController {
 
   int randomCardNumber = 0;
 
+  final repository = Get.put(CardRepository());
+
   appBarOnPressed() async {
-    final repository = Get.put(CardRepository());
+    
     final tmp = await getRandomCard();
     repository.addCard(tmp);
     repository.getCards();
@@ -30,7 +32,6 @@ class CreateCardController {
   }
 
   onSavePressed() {
-    final repository = Get.put(CardRepository());
     repository.cardList.add(
       CardModel(
         cardholderName: cardholderName.text,
@@ -47,11 +48,11 @@ class CreateCardController {
     var url = Uri.https('random-data-api.com', 'api/v2/credit_cards');
     var response = await http.get(url);
     final json = jsonDecode(response.body);
-    randomCardNumber++;
+    randomCardNumber += repository.cardList.length;
     final profileController = Get.put(ProfileController());
     CardModel tmp = CardModel(
         cardholderName: profileController.user.email,
-        alias: 'Random Card',
+        alias: 'Random Card $randomCardNumber',
         cardNumber: json["credit_card_number"],
         cvc: json["id"].toString(),
         expDate: json["credit_card_expiry_date"]);
