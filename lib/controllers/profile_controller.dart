@@ -1,9 +1,10 @@
+import 'dart:io';
+
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:vwalltet/models/profile_model.dart';
 import 'package:vwalltet/services/auth_service.dart';
-
-import 'dart:io';
 
 class ProfileController extends GetxController {
   static final _instance = ProfileController._internal();
@@ -23,6 +24,7 @@ class ProfileController extends GetxController {
     _user = Rx<ProfileModel>(ProfileModel(
       id: user!.uid,
       email: user.email!,
+      image: Image.asset('assets/icons/icon.png', height: 80.0, width: 80.0,)
     ));
   }
 
@@ -36,8 +38,8 @@ class ProfileController extends GetxController {
     final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
 
     if (pickedFile != null) {
-      _user.value.image = File(pickedFile.path);
-      update();
+      _user.value.image = Image.file(File(pickedFile.path));
+      _user.refresh();
     }
   }
 }

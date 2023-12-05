@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:get/get.dart';
 import 'package:vwalltet/controllers/profile_controller.dart';
 import 'package:vwalltet/models/card_model.dart';
 import 'package:vwalltet/services/auth_service.dart';
@@ -24,13 +25,15 @@ class CardController {
   static get instance => _instance;
 
   Future<CardModel> getRandomCard() async {
-    var url = Uri.https('random-data-api.com', 'api/v2/credit_cards');
-    var response = await http.get(url);
+    final url = Uri.https('random-data-api.com', 'api/v2/credit_cards');
+    final response = await http.get(url);
     final json = jsonDecode(response.body);
     randomCardNumber++;
 
+    final controller = Get.put(ProfileController());
+
     return CardModel(
-        cardholderName: ProfileController.user.email,
+        cardholderName: controller.user.email,
         alias: 'Random Card $randomCardNumber',
         cardNumber: json["credit_card_number"],
         cvc: json["id"].toString(),

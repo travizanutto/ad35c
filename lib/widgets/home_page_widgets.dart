@@ -21,7 +21,7 @@ Row appBarTitle() {
 
 AppBar homePageAppBar(BuildContext context) {
   final ProfileController controller = Get.find<ProfileController>();
-  final user = controller.user;
+  
   return AppBar(
     title: appBarTitle(),
     centerTitle: false,
@@ -35,11 +35,10 @@ AppBar homePageAppBar(BuildContext context) {
           margin: const EdgeInsets.all(10),
           width: 30,
           height: 30,
-          child: GetBuilder<ProfileController>(
-            builder: (_) => CircleAvatar(
-              backgroundImage: user.image != null
-                  ? FileImage(user.image!)
-                  : AssetImage('assets/icons/icon.png') as ImageProvider,
+          child: Obx(
+            () => CircleAvatar(
+              backgroundImage: controller.user.image!.image,
+              maxRadius: 0.5,
             ),
           ),
         ),

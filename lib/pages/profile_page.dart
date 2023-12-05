@@ -30,7 +30,9 @@ class ProfilePage extends StatelessWidget {
                     () => LoginPage(),
               );
             },
-            icon: Icon(Icons.logout),
+            icon: Icon(Icons.logout,
+            color: Colors.white,
+          ),
           ),
         ],
       ),
@@ -52,7 +54,7 @@ class ProfilePage extends StatelessWidget {
                     shape: BoxShape.circle,
                     image: DecorationImage(
                       fit: BoxFit.cover,
-                      image: controller.user.image != null ? FileImage(controller.user.image!) : AssetImage('assets/icons/icon.png') as ImageProvider,
+                      image: controller.user.image!.image,
                     ),
                   ),
                 );
