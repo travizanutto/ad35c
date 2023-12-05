@@ -20,7 +20,8 @@ Row appBarTitle() {
 }
 
 AppBar homePageAppBar(BuildContext context) {
-  final user = ProfileController.user;
+  final ProfileController controller = Get.find<ProfileController>();
+  final user = controller.user;
   return AppBar(
     title: appBarTitle(),
     centerTitle: false,

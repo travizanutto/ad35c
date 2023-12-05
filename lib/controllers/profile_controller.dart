@@ -1,30 +1,43 @@
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:vwalltet/models/profile_model.dart';
 import 'package:vwalltet/services/auth_service.dart';
 
 import 'dart:io';
 
 class ProfileController extends GetxController {
-  static final _instance = ProfileController();
+  static final _instance = ProfileController._internal();
   late Rx<ProfileModel> _user;
+
+  ProfileController._internal();
+
+  factory ProfileController() {
+    return _instance;
+  }
 
   @override
   onInit() {
     super.onInit();
     var user = AuthService.user;
 
-    _instance._user = Rx<ProfileModel>(ProfileModel(
+    _user = Rx<ProfileModel>(ProfileModel(
       id: user!.uid,
       email: user.email!,
-      image: File(''),
-      defaultImagePath: 'assets/icons/icon.png',
     ));
   }
 
-  static ProfileModel get user => _instance._user.value;
+  ProfileModel get user => _user.value;
 
   static Future<void> pickImage() async {
-    await _instance._user.value.pickImage();
-    _instance._user.update((profile) {});
+    await _instance.pickImageInstance();
+  }
+
+  Future<void> pickImageInstance() async {
+    final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
+
+    if (pickedFile != null) {
+      _user.value.image = File(pickedFile.path);
+      update();
+    }
   }
 }

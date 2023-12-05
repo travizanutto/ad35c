@@ -7,7 +7,8 @@ import 'package:vwalltet/services/auth_service.dart';
 
 class ProfilePage extends StatelessWidget {
   ProfilePage({super.key});
-  final user = ProfileController.user;
+
+  final ProfileController controller = Get.find<ProfileController>();
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,7 @@ class ProfilePage extends StatelessWidget {
             onPressed: () {
               AuthService().signOut();
               Get.offAll(
-                () => LoginPage(),
+                    () => LoginPage(),
               );
             },
             icon: Icon(Icons.logout),
@@ -43,24 +44,26 @@ class ProfilePage extends StatelessWidget {
               onTap: () async {
                 await ProfileController.pickImage();
               },
-              child: Container(
-                width: 100,
-                height: 100,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
+              child: Obx(() {
+                return Container(
+                  width: 100,
+                  height: 100,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
                       fit: BoxFit.cover,
-                      image: user.image != null ? FileImage(user.image!) : AssetImage('assets/icons/icon.png') as ImageProvider,
+                      image: controller.user.image != null ? FileImage(controller.user.image!) : AssetImage('assets/icons/icon.png') as ImageProvider,
+                    ),
                   ),
-                ),
-              ),
+                );
+              }),
             ),
           ),
           Padding(
             padding: EdgeInsets.only(top: 40.0),
             child: Center(
               child: Text(
-                user.email,
+                controller.user.email,
                 style: TextStyle(fontSize: 18),
                 textAlign: TextAlign.center,
               ),
